@@ -19,12 +19,23 @@ class Fourchette::GitHub
     end
   end
 
+  def update_hook
+    puts 'Updating the hook for your app...'
+    toggle_active_state_to fourchette_hook, fourchette_hook.active
+  end
+
+  def delete_hook
+    puts 'Removing the hook for your app...'
+    octokit.remove_hook(ENV['FOURCHETTE_GITHUB_PROJECT'], fourchette_hook.id)
+  end
+
   private
   def octokit
     @octokit_client ||= Octokit::Client.new(login: ENV['FOURCHETTE_GITHUB_USERNAME'], password: ENV['FOURCHETTE_GITHUB_PERSONAL_TOKEN'])
   end
 
   def create_hook
+    puts 'Creating a new hook...'
     octokit.create_hook(
       ENV['FOURCHETTE_GITHUB_PROJECT'],
       'web',
