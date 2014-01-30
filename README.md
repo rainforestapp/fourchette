@@ -31,10 +31,10 @@ Those steps could be made way easier, but this is a really minimal implementatio
 
 ## Configuration
 
-- ENV['github_project'] = "jipiboily/fourchette"
-- ENV['github_personal_token'] = 'a token here...' # You can create one here: https://github.com/settings/applications
-- ENV['heroku_api_key'] = 'API key here'
-- ENV['heroku_source_name_app'] = 'the name of the app to fork from'
+- `ENV['github_project'] = "jipiboily/fourchette"`
+- `ENV['github_personal_token'] = 'a token here...'` # You can create one here: https://github.com/settings/applications
+- `ENV['heroku_api_key'] = 'API key here'`
+- `ENV['heroku_source_name_app'] = 'the name of the app to fork from'`
 
 
 ## It needs some love...
