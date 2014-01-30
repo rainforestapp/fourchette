@@ -15,3 +15,7 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
+.ruby-version
+
+# Mac specific
+.DS_Store
