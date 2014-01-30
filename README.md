@@ -28,14 +28,23 @@ Those steps could be made way easier, but this is a really minimal implementatio
 2. push to Heroku
 3. configure the right environement variables (see [#configuration](#configuration))
 
-
 ## Configuration
 
-- `ENV['github_project'] = "jipiboily/fourchette"`
-- `ENV['github_personal_token'] = 'a token here...'` # You can create one here: https://github.com/settings/applications
-- `ENV['heroku_api_key'] = 'API key here'`
-- `ENV['heroku_source_name_app'] = 'the name of the app to fork from'`
+- `ENV['FOURCHETTE_GITHUB_PROJECT'] = "jipiboily/fourchette"`
+- `ENV['FOURCHETTE_GITHUB_USERNAME'] = "jipiboily"`
+- `ENV['FOURCHETTE_GITHUB_PERSONAL_TOKEN'] = 'a token here...'` # You can create one here: https://github.com/settings/applications
+- `ENV['FOURCHETTE_HEROKU_API_KEY'] = 'API key here'`
+- `ENV['FOURCHETTE_HEROKU_APP_TO_FORK'] = 'the name of the app to fork from'`
+- `ENV['FOURCHETTE_APP_URL'] = "http://fourchette-app.herokuapp.com"`
 
+## Contribute
+
+- fork & clone
+- `bundle install`
+- `foreman start -f Procfile.dev`
+- You now have the app running on port 9292
+
+Bonus: if you need a tunnel to your local dev machine to work with GitHub hooks, you might want to look at https://ngrok.com/.
 
 ## It needs some love...
 
