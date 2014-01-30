@@ -1,6 +1,8 @@
 # Fourchette
 
-Fourchette is your new best friend. It will help you test your PRs against a fork of your Heroku environement. You will have one Heroku environement per PR now. Isn't that amazing? It will make testing way easier and you won't have the broken code from other PRs on staging but only the code that requies testing for that context.
+Fourchette is your new best friend for having isolated testing environements. It will help you test your PRs against a fork of one your Heroku apps. You will have one Heroku app per PR now. Isn't that amazing? It will make testing way easier and you won't have the broken code from other PRs on staging but only the code that requies testing for that context.
+
+*IMPORTANT: Please note that it also means you will pay for multiple apps and their addons. Watch out!*
 
 ## Flow
 
