@@ -20,4 +20,10 @@ namespace :fourchette do
   task :delete do
     Fourchette::GitHub.new.delete_hook
   end
+
+  desc 'Brings up a REPL with the code loaded'
+  task :console do
+    require './lib/fourchette'
+    binding.pry
+  end
 end
