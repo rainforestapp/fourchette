@@ -45,7 +45,7 @@ class Fourchette::GitHub
         fourchette_env: FOURCHETTE_CONFIG[:env_name]
       },
       {
-        :events => ['push', 'pull_request'],
+        :events => ['pull_request'],
         :active => true
       }
     )
@@ -88,7 +88,7 @@ class Fourchette::GitHub
         fourchette_env: FOURCHETTE_CONFIG[:env_name]
       },
       {
-        :events => ['push', 'pull_request'],
+        :events => ['pull_request'],
         :active => active_value
       }
     )
