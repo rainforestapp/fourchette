@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'octokit'
 if development?
   require "sinatra/reloader"
   require "pry"

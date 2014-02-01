@@ -1,5 +1,3 @@
-require 'octokit'
-
 class Fourchette::GitHub
   def enable_hook
     puts 'Enabling the hooks for your app...'
