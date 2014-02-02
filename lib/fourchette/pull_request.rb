@@ -2,7 +2,10 @@ class Fourchette::PullRequest
   include SuckerPunch::Job
 
   def perform params
+    callbacks = Fourchette::Callbacks.new(params)
     @params = params
+
+    callbacks.before
 
     case action
     when 'synchronize' # new push against the PR
@@ -14,6 +17,8 @@ class Fourchette::PullRequest
     when 'opened'
       fork.create
     end
+
+    callbacks.after
   end
 
   def action

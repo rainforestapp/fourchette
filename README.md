@@ -28,7 +28,7 @@ Those steps could be made way easier, but this is a really minimal implementatio
 2. push to Heroku
 3. configure the right environement variables (see [#configuration](#configuration))
 
-## Configuration
+### Configuration
 
 - `export FOURCHETTE_GITHUB_PROJECT="jipiboily/fourchette"`
 - `export FOURCHETTE_GITHUB_USERNAME="jipiboily"`
@@ -38,6 +38,12 @@ Those steps could be made way easier, but this is a really minimal implementatio
 - `export FOURCHETTE_HEROKU_APP_TO_FORK='the name of the app to fork from'`
 - `export FOURCHETTE_APP_URL="http://fourchette-app.herokuapp.com"`
 - `export FOURCHETTE_HEROKU_APP_PREFIX="fourchette"` # This is basically to namespace your forks. In that example, they would be named "fourchette-pr-1234" where "1234" is the PR number. Beware, the name can't be more than 30 characters total! It will be changed to be lowercase only, so you should probably just use lowercase characters anyways.
+
+### Before & after steps
+
+You need to run steps before and/or after the creation of your new Heroku app? Let's say you want to run mirgations after deploying new code. There is a simple (and primitive) way of doing it. It might not be perfect but can work until there is a cleaner and more flexible way of doing so, if required.
+
+Basically, you just want to modify the `before` or `after` methods of `Fourchette::Callbacks` (`lib/fourchette/callbacks.rb`) to suit your needs. In those methods, you have access to GitHub's hook data via the `@param` instance variable.
 
 ## Async processing note
 
@@ -56,12 +62,12 @@ Bonus: if you need a tunnel to your local dev machine to work with GitHub hooks,
 
 What needs to be improved?
 
-- post deploy steps, for migration and such
 - it is not serious until there are specs for it, so add specs for that once we have a solid direction
 - add Code Climate
 - add Travis CI
 - add Coveralls
 - make it a gem
+-- imrpove how to deal with callbacks as part of making this a gem
 - security improvements (we should not accept hooks from anyone else than GitHub)
 - oAuth instead of GitHub token?
 - multi project would be great
