@@ -22,6 +22,7 @@ end
 module Fourchette
 end
 
+require_relative 'fourchette/logger'
 require_relative 'fourchette/web'
 require_relative 'fourchette/github'
 require_relative 'fourchette/pull_request'

@@ -1,4 +1,6 @@
 class Fourchette::Fork
+  include Fourchette::Logger
+
   def initialize params
     @params = params
     @heroku = Fourchette::Heroku.new
@@ -12,7 +14,7 @@ class Fourchette::Fork
     FileUtils.rm_rf('tmp/')
 
     # Add key to current
-    puts "Creating an SSH key"
+    logger.info "Creating an SSH key"
     key_path = "~/.ssh/id_rsa-fourchette"
     public_key_path = "#{key_path}.pub"
     `ssh-keygen -t rsa -C "temporary@fourchetteapp" -N "" -f #{key_path} -q`
@@ -26,11 +28,11 @@ class Fourchette::Fork
     end
 
     # Add SSH key to the Heroku account
-    puts "Adding the SSH key to your Heroku account"
+    logger.info "Adding the SSH key to your Heroku account"
     heroku_public_key = @heroku.client.key.create(public_key: public_key_content)
 
     # Clone & push
-    puts "Cloning repository..."
+    logger.info "Cloning repository..."
     repo = Git.clone(github_git_url, 'tmp')
     repo.checkout(branch_name)
     repo.branch('master').delete
@@ -41,16 +43,16 @@ class Fourchette::Fork
     end
     repo.add_remote('heroku', heroku_git_url)
 
-    puts "Pushing to Heroku..."
+    logger.info "Pushing to Heroku..."
     repo.push(repo.remote('heroku'))
-    puts "Done pushing to Heroku, apparently!"
+    logger.info "Done pushing to Heroku, apparently!"
 
     # REMOVE key to the Heroku account
-    puts "Removing SSH key from your Heroku account"
+    logger.info "Removing SSH key from your Heroku account"
     @heroku.client.key.delete(heroku_public_key['id'])
 
     # Remove ssh key
-    puts "Removing SSH key for file system"
+    logger.info "Removing SSH key for file system"
     FileUtils.rm_rf("~./ssh/id_rsa-fourchette*")
   end
 

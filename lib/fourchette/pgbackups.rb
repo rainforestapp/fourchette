@@ -1,5 +1,7 @@
 require "heroku/client/pgbackups"
 class Fourchette::Pgbackups
+  include Fourchette::Logger
+
   def initialize
     @heroku = Fourchette::Heroku.new
   end
@@ -18,7 +20,7 @@ class Fourchette::Pgbackups
   private
   def ensure_pgbackups_is_present heroku_app_name
     unless @heroku.client.addon.list(heroku_app_name).select { |addon| addon['name'] == 'pgbackups' }.any?
-      puts "Adding pgbackups to #{heroku_app_name}"
+      logger.info "Adding pgbackups to #{heroku_app_name}"
       @heroku.client.addon.create(heroku_app_name, { plan: 'pgbackups' })
     end
   end

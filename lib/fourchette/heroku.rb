@@ -1,4 +1,6 @@
 class Fourchette::Heroku
+  include Fourchette::Logger
+
   def app_exists? name
     client.app.list.collect { |app| app if app['name'] == name }.reject(&:nil?).any?
   end
@@ -11,7 +13,7 @@ class Fourchette::Heroku
   end
 
   def delete app_name
-    puts "Deleting #{app_name}"
+    logger.info "Deleting #{app_name}"
     client.app.delete(app_name)
   end
 
@@ -37,12 +39,12 @@ class Fourchette::Heroku
 
   private
   def create_app name
-    puts "Creating #{name}"
+    logger.info "Creating #{name}"
     client.app.create({ name: name })
   end
 
   def copy_config from, to
-    puts "Copying configs from #{from} to #{to}"
+    logger.info "Copying configs from #{from} to #{to}"
     from_congig_vars = config_vars(from)
     # WE SHOULD NOT MOVE THE HEROKU_POSTGRES_*_URL...
     from_congig_vars.reject! { |k, v| k.start_with?('HEROKU_POSTGRESQL_') && k.end_with?('_URL') }
@@ -50,16 +52,16 @@ class Fourchette::Heroku
   end
 
   def copy_add_ons from, to
-    puts "Copying addons from #{from} to #{to}"
+    logger.info "Copying addons from #{from} to #{to}"
     from_addons = client.addon.list(from)
     from_addons.each do |addon|
-      puts "Adding #{addon['plan']['name']} to #{to}"
+      logger.info "Adding #{addon['plan']['name']} to #{to}"
       client.addon.create(to, { plan: addon['plan']['name'] })
     end
   end
 
   def copy_pg from, to
-    puts "Copying Postgres's data from #{from} to #{to}"
+    logger.info "Copying Postgres's data from #{from} to #{to}"
     backup = Fourchette::Pgbackups.new
     backup.copy(from, to)
   end

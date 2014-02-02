@@ -1,6 +1,8 @@
 class Fourchette::GitHub
+  include Fourchette::Logger
+
   def enable_hook
-    puts 'Enabling the hooks for your app...'
+    logger.info 'Enabling the hooks for your app...'
     if fourchette_hook
       enable(fourchette_hook)
     else
@@ -9,21 +11,21 @@ class Fourchette::GitHub
   end
 
   def disable_hook
-    puts 'Disabling the hook for your app...'
+    logger.info 'Disabling the hook for your app...'
     if fourchette_hook && fourchette_hook.active == true
       disable(fourchette_hook)
     else
-      puts 'Nothing to disable, move along!'
+      logger.error 'Nothing to disable, move along!'
     end
   end
 
   def update_hook
-    puts 'Updating the hook for your app...'
+    logger.info 'Updating the hook for your app...'
     toggle_active_state_to fourchette_hook, fourchette_hook.active
   end
 
   def delete_hook
-    puts 'Removing the hook for your app...'
+    logger.info 'Removing the hook for your app...'
     octokit.remove_hook(ENV['FOURCHETTE_GITHUB_PROJECT'], fourchette_hook.id)
   end
 
@@ -38,7 +40,7 @@ class Fourchette::GitHub
   end
 
   def create_hook
-    puts 'Creating a new hook...'
+    logger.info 'Creating a new hook...'
     octokit.create_hook(
       ENV['FOURCHETTE_GITHUB_PROJECT'],
       'web',
@@ -70,7 +72,7 @@ class Fourchette::GitHub
 
   def enable(hook)
     if hook.active
-      puts 'The hook is already active, dude!'
+      logger.error 'The hook is already active, dude!'
     else
       toggle_active_state_to hook, true
     end
