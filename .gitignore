@@ -19,3 +19,6 @@ tmp
 
 # Mac specific
 .DS_Store
+
+# ngrok is for having tunnels to localhost, for local dev
+ngrok
