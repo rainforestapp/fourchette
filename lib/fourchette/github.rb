@@ -27,6 +27,11 @@ class Fourchette::GitHub
     octokit.remove_hook(ENV['FOURCHETTE_GITHUB_PROJECT'], fourchette_hook.id)
   end
 
+  def comment_pr pr_number, comment
+    comment = "****** FOURCHETTE COMMENT ******\n\n#{comment}\n\n****** END OF FOURCHETTE COMMENT ******"
+    octokit.add_comment(ENV['FOURCHETTE_GITHUB_PROJECT'], pr_number, comment)
+  end
+
   private
   def octokit
     @octokit_client ||= Octokit::Client.new(login: ENV['FOURCHETTE_GITHUB_USERNAME'], password: ENV['FOURCHETTE_GITHUB_PERSONAL_TOKEN'])

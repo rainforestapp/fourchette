@@ -52,7 +52,6 @@ Bonus: if you need a tunnel to your local dev machine to work with GitHub hooks,
 
 What needs to be improved?
 
-- commenting the PR with URL for testing
 - post deploy steps, for migration and such
 - it is not serious until there are specs for it, so add specs for that once we have a solid direction
 - Code Climate enabled
