@@ -30,12 +30,14 @@ Those steps could be made way easier, but this is a really minimal implementatio
 
 ## Configuration
 
-- `ENV['FOURCHETTE_GITHUB_PROJECT'] = "jipiboily/fourchette"`
-- `ENV['FOURCHETTE_GITHUB_USERNAME'] = "jipiboily"`
-- `ENV['FOURCHETTE_GITHUB_PERSONAL_TOKEN'] = 'a token here...'` # You can create one here: https://github.com/settings/applications
-- `ENV['FOURCHETTE_HEROKU_API_KEY'] = 'API key here'`
-- `ENV['FOURCHETTE_HEROKU_APP_TO_FORK'] = 'the name of the app to fork from'`
-- `ENV['FOURCHETTE_APP_URL'] = "http://fourchette-app.herokuapp.com"`
+- `export FOURCHETTE_GITHUB_PROJECT="jipiboily/fourchette"`
+- `export FOURCHETTE_GITHUB_USERNAME="jipiboily"`
+- `export FOURCHETTE_GITHUB_PERSONAL_TOKEN='a token here...'` # You can create one here: https://github.com/settings/applications
+- `export FOURCHETTE_HEROKU_USERNAME='me@domain'`
+- `export FOURCHETTE_HEROKU_API_KEY='API key here'`
+- `export FOURCHETTE_HEROKU_APP_TO_FORK='the name of the app to fork from'`
+- `export FOURCHETTE_APP_URL="http://fourchette-app.herokuapp.com"`
+- `export FOURCHETTE_HEROKU_APP_PREFIX="fourchette"` # This is basically to namespace your forks. They will be named "fourchette-PR-1234" where "1234" is the PR number. Beware, the name can't be more than 30 characters total! It will be changed to be lowercase only, so you should probably just use lowercase characters anyways.
 
 ## Contribute
 
