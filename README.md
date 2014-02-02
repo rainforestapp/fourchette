@@ -47,7 +47,7 @@ Fourchette uses [Sucker Punch](https://github.com/brandonhilkert/sucker_punch), 
 
 - fork & clone
 - `bundle install`
-- `foreman start -f Procfile.dev`
+- `foreman start`
 - You now have the app running on port 9292
 
 Bonus: if you need a tunnel to your local dev machine to work with GitHub hooks, you might want to look at https://ngrok.com/.
