@@ -52,11 +52,12 @@ Bonus: if you need a tunnel to your local dev machine to work with GitHub hooks,
 
 What needs to be improved?
 
+- backgroundify the work (Sidekiq) - chances are very high that this would not work as is with big apps (code base, but mostly addons + database)
 - post deploy steps, for migration and such
 - it is not serious until there are specs for it, so add specs for that once we have a solid direction
-- Code Climate enabled
-- Travis CI enabled
+- add Code Climate
+- add Travis CI
 - make it a gem
 - security improvements (we should not accept hooks from anyone else than GitHub)
-- oAuth instead of Token
+- oAuth instead of GitHub token?
 - multi project would be great
