@@ -1,12 +1,12 @@
 require './lib/fourchette'
 
 namespace :fourchette do
-  desc 'This enables Fourchette hook for the app it is configured'
+  desc 'This enables Fourchette hook'
   task :enable do
     Fourchette::GitHub.new.enable_hook
   end
 
-  desc 'This disables Fourchette hook for the app it is configured'
+  desc 'This disables Fourchette hook'
   task :disable do
     Fourchette::GitHub.new.disable_hook
   end
