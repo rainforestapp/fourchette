@@ -55,8 +55,14 @@ class Fourchette::Heroku
     logger.info "Copying addons from #{from} to #{to}"
     from_addons = client.addon.list(from)
     from_addons.each do |addon|
-      logger.info "Adding #{addon['plan']['name']} to #{to}"
-      client.addon.create(to, { plan: addon['plan']['name'] })
+      name = addon['plan']['name']
+      begin
+        logger.info "Adding #{name} to #{to}"
+        client.addon.create(to, { plan: name })
+      rescue Excon::Errors::UnprocessableEntity => e
+        logger.error "Failed to copy addon #{name}"
+        logger.error e
+      end
     end
   end
 
