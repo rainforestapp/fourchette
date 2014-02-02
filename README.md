@@ -60,6 +60,7 @@ What needs to be improved?
 - it is not serious until there are specs for it, so add specs for that once we have a solid direction
 - add Code Climate
 - add Travis CI
+- add Coveralls
 - make it a gem
 - security improvements (we should not accept hooks from anyone else than GitHub)
 - oAuth instead of GitHub token?
