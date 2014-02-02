@@ -35,6 +35,9 @@ class Fourchette::Fork
     logger.info "Cloning repository..."
     repo = Git.clone(github_git_url, 'tmp')
     repo.checkout(branch_name)
+
+    # TODO - HACK ALERT - Next couple lines are really hacky, and used
+    # instead of calling `git push heroku my_branch_name:master`
     repo.branch('master').delete
     begin
       repo.branch('master').merge(branch_name)
