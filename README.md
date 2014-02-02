@@ -37,7 +37,7 @@ Those steps could be made way easier, but this is a really minimal implementatio
 - `export FOURCHETTE_HEROKU_API_KEY='API key here'`
 - `export FOURCHETTE_HEROKU_APP_TO_FORK='the name of the app to fork from'`
 - `export FOURCHETTE_APP_URL="http://fourchette-app.herokuapp.com"`
-- `export FOURCHETTE_HEROKU_APP_PREFIX="fourchette"` # This is basically to namespace your forks. They will be named "fourchette-PR-1234" where "1234" is the PR number. Beware, the name can't be more than 30 characters total! It will be changed to be lowercase only, so you should probably just use lowercase characters anyways.
+- `export FOURCHETTE_HEROKU_APP_PREFIX="fourchette"` # This is basically to namespace your forks. In that example, they would be named "fourchette-pr-1234" where "1234" is the PR number. Beware, the name can't be more than 30 characters total! It will be changed to be lowercase only, so you should probably just use lowercase characters anyways.
 
 ## Contribute
 
