@@ -1,9 +1,9 @@
 class Fourchette::PullRequest
-  def initialize params
-    @params = params
-  end
+  include SuckerPunch::Job
 
-  def perform
+  def perform params
+    @params = params
+
     case action
     when 'synchronize' # new push against the PR
       fork.update

@@ -12,6 +12,8 @@ gem "git", "~> 1.2.6"
 gem "heroics", "~> 0.0.2"
 gem "heroku", "~> 3.3.0" # Deprecated, but best/easiest solution for the pgbackups...
 
+gem "sucker_punch", "~> 1.0.2"
+
 group :development do
   gem "foreman", "~> 0.63.0"
   gem 'pry-debugger'

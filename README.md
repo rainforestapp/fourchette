@@ -39,6 +39,10 @@ Those steps could be made way easier, but this is a really minimal implementatio
 - `export FOURCHETTE_APP_URL="http://fourchette-app.herokuapp.com"`
 - `export FOURCHETTE_HEROKU_APP_PREFIX="fourchette"` # This is basically to namespace your forks. In that example, they would be named "fourchette-pr-1234" where "1234" is the PR number. Beware, the name can't be more than 30 characters total! It will be changed to be lowercase only, so you should probably just use lowercase characters anyways.
 
+## Async processing note
+
+Fourchette uses [Sucker Punch](https://github.com/brandonhilkert/sucker_punch), "a single-process Ruby asynchronous processing library". No need for redis or extra processes. It also mean it can run for free on Heroku, if this is what you want.
+
 ## Contribute
 
 - fork & clone
@@ -52,7 +56,6 @@ Bonus: if you need a tunnel to your local dev machine to work with GitHub hooks,
 
 What needs to be improved?
 
-- backgroundify the work (Sidekiq) - chances are very high that this would not work as is with big apps (code base, but mostly addons + database)
 - post deploy steps, for migration and such
 - it is not serious until there are specs for it, so add specs for that once we have a solid direction
 - add Code Climate

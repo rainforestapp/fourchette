@@ -4,6 +4,7 @@ require 'cgi' # Required for Heroics
 require 'heroics'
 require 'octokit'
 require 'git'
+require 'sucker_punch'
 
 # TODO: Extract this to development.rb and production.rb
 if development?
