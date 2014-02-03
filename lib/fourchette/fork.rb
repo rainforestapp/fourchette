@@ -74,7 +74,7 @@ class Fourchette::Fork
 
   private
   def github
-    Fourchette::GitHub.new
+    @github ||= Fourchette::GitHub.new
   end
 
   def create_unless_exists
