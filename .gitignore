@@ -22,3 +22,4 @@ tmp
 
 # ngrok is for having tunnels to localhost, for local dev
 ngrok
+tags
