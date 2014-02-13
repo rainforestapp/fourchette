@@ -24,6 +24,6 @@ namespace :fourchette do
   desc 'Brings up a REPL with the code loaded'
   task :console do
     require './lib/fourchette'
-    binding.pry
+    Pry.start
   end
 end
