@@ -8,14 +8,14 @@
 
 Fourchette is your new best friend for having isolated testing environements. It will help you test your GitHub PRs against a fork of one your Heroku apps. You will have one Heroku app per PR now. Isn't that amazing? It will make testing way easier and you won't have the (maybe) broken code from other PRs on staging but only the code that requires testing.
 
-*IMPORTANT: Please note that forking your Heroku app means it will copy the same addon plans and that you will pay for multiple apps and their addons. Watch out!*
+**IMPORTANT: Please note that forking your Heroku app means it will copy the same addon plans and that you will pay for multiple apps and their addons. Watch out!**
 
 ## Flow
 
 - a PR is created against your GitHub project
 - Fourchette receives an event via GitHub Hooks
--- it [forks](https://devcenter.heroku.com/articles/fork-app) an environement making it available to you
--- any new commit against that PR will update the code
+  - it [forks](https://devcenter.heroku.com/articles/fork-app) an environement making it available to you
+  - any new commit against that PR will update the code
 - closing the PR will delete the forked app
 - re-opening the PR will re-create a fork
 
@@ -23,7 +23,7 @@ Fourchette is your new best friend for having isolated testing environements. It
 
 Seriously? You need a diagram for that? Nope. Not going to do this. PRs accepted...I guess.
 
-# Features
+## Features
 - single project
 - configuration is made via environement variables
 - async processing
@@ -92,10 +92,8 @@ What needs to be improved?
 
 - currently, it is assuming everything goes well, very little to no error management. This needs to improved.
 - it is not serious until there are specs for it, so add specs for that once we have a solid direction
-- add Travis CI
-- add Coveralls
 - make it a gem
--- imrpove how to deal with callbacks as part of making this a gem
+  - improve how to deal with callbacks as part of making this a gem
 - security improvements (we should not accept hooks from anyone else than GitHub)
 - oAuth instead of GitHub token?
 - multi project would be great
