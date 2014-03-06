@@ -1,5 +1,9 @@
 # Fourchette
 
+[![Code Climate](https://codeclimate.com/github/jipiboily/fourchette.png)](https://codeclimate.com/github/jipiboily/fourchette)
+
+** IMPORTANT: this is a work in progress, use at your own risk. **
+
 Fourchette is your new best friend for having isolated testing environements. It will help you test your GitHub PRs against a fork of one your Heroku apps. You will have one Heroku app per PR now. Isn't that amazing? It will make testing way easier and you won't have the (maybe) broken code from other PRs on staging but only the code that requires testing.
 
 *IMPORTANT: Please note that forking your Heroku app means it will copy the same addon plans and that you will pay for multiple apps and their addons. Watch out!*
@@ -86,7 +90,6 @@ What needs to be improved?
 
 - currently, it is assuming everything goes well, very little to no error management. This needs to improved.
 - it is not serious until there are specs for it, so add specs for that once we have a solid direction
-- add Code Climate
 - add Travis CI
 - add Coveralls
 - make it a gem
