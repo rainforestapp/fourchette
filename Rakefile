@@ -1,4 +1,9 @@
 require './lib/fourchette'
+require 'rspec/core/rake_task'
+
+# Set default Rake task to spec
+RSpec::Core::RakeTask.new(:spec)
+task :default => :spec
 
 namespace :fourchette do
   desc 'This enables Fourchette hook'
