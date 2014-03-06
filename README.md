@@ -2,6 +2,7 @@
 
 [![Code Climate](https://codeclimate.com/github/jipiboily/fourchette.png)](https://codeclimate.com/github/jipiboily/fourchette)
 [![Build Status](https://travis-ci.org/jipiboily/fourchette.png?branch=master)](https://travis-ci.org/jipiboily/fourchette)
+[![Coverage Status](https://coveralls.io/repos/jipiboily/fourchette/badge.png)](https://coveralls.io/r/jipiboily/fourchette)
 
 **IMPORTANT: this is a work in progress, use at your own risk.**
 
