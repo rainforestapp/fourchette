@@ -1,6 +1,7 @@
 # Fourchette
 
 [![Code Climate](https://codeclimate.com/github/jipiboily/fourchette.png)](https://codeclimate.com/github/jipiboily/fourchette)
+[![Build Status](https://travis-ci.org/jipiboily/fourchette.png?branch=master)](https://travis-ci.org/jipiboily/fourchette)
 
 **IMPORTANT: this is a work in progress, use at your own risk.**
 
