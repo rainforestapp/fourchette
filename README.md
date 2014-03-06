@@ -1,8 +1,14 @@
-# Fourchette
-
-[![Code Climate](https://codeclimate.com/github/jipiboily/fourchette.png)](https://codeclimate.com/github/jipiboily/fourchette)
-[![Build Status](https://travis-ci.org/jipiboily/fourchette.png?branch=master)](https://travis-ci.org/jipiboily/fourchette)
-[![Coverage Status](https://coveralls.io/repos/jipiboily/fourchette/badge.png)](https://coveralls.io/r/jipiboily/fourchette)
+<p align="center">
+  <a href="https://github.com/jipiboily/fourchette">
+    <img src="http://i.imgur.com/qF38wyb.png" alt="Fourchette" />
+  </a>
+  <br />
+  <b>Your new best friend for isolated testing environement</b>
+  <br />
+  <a href="https://codeclimate.com/github/jipiboily/fourchette"><img src="https://codeclimate.com/github/jipiboily/fourchette.png" /></a>
+  <a href="https://github.com/jipiboily/fourchette"><img src="https://travis-ci.org/jipiboily/fourchette.png?branch=master" /></a>
+  <a href='https://coveralls.io/r/jipiboily/fourchette'><img src='https://coveralls.io/repos/jipiboily/fourchette/badge.png' alt='Coverage Status' /></a>
+</p>
 
 **IMPORTANT: this is a work in progress, use at your own risk.**
 
