@@ -3,7 +3,7 @@
     <img src="http://i.imgur.com/qF38wyb.png" alt="Fourchette" />
   </a>
   <br />
-  <b>Your new best friend for isolated testing environement</b>
+  <b>Your new best friend for isolated testing environments on Heroku</b>
   <br />
   <a href="https://codeclimate.com/github/jipiboily/fourchette"><img src="https://codeclimate.com/github/jipiboily/fourchette.png" /></a>
   <a href="https://github.com/jipiboily/fourchette"><img src="https://travis-ci.org/jipiboily/fourchette.png?branch=master" /></a>
