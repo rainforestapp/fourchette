@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/jipiboily/fourchette">
-    <img src="http://i.imgur.com/qF38wyb.png" alt="Fourchette" />
+    <img src="http://i.imgur.com/967yX36.png" alt="Fourchette" />
   </a>
   <br />
   <b>Your new best friend for isolated testing environments on Heroku</b>
@@ -103,3 +103,7 @@ What needs to be improved?
 - security improvements (we should not accept hooks from anyone else than GitHub)
 - oAuth instead of GitHub token?
 - multi project would be great
+
+# Contributors
+
+Thanks to @jpsirois for the logo!
