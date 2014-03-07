@@ -106,4 +106,4 @@ What needs to be improved?
 
 # Contributors
 
-Thanks to @jpsirois for the logo!
+Thanks to [@jpsirois](https://github.com/jpsirois/) for the logo!
