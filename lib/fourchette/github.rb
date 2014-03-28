@@ -64,7 +64,7 @@ class Fourchette::GitHub
     existing_hook = nil
 
     hooks.each do |hook|
-      existing_hook = hook unless hook.config.fourchette_env.nil?
+      existing_hook = hook unless hook.config && hook.config.fourchette_env.nil?
     end
 
     existing_hook
