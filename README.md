@@ -39,7 +39,7 @@ Seriously? You need a diagram for that? Nope. Not going to do this. PRs accepted
 
 Those steps could be made way easier, but this is a really minimal implementation.
 
-1. clone this repo
+1. clone this repo (`git clone git@github.com:jipiboily/fourchette.git`)
 2. push to Heroku
 3. configure the right environement variables (see [#configuration](#configuration))
 4. Enable your Fourchette instance
