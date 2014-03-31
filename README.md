@@ -55,6 +55,8 @@ Those steps could be made way easier, but this is a really minimal implementatio
 - `export FOURCHETTE_APP_URL="http://fourchette-app.herokuapp.com"`
 - `export FOURCHETTE_HEROKU_APP_PREFIX="fourchette"` # This is basically to namespace your forks. In that example, they would be named "fourchette-pr-1234" where "1234" is the PR number. Beware, the name can't be more than 30 characters total! It will be changed to be lowercase only, so you should probably just use lowercase characters anyways.
 
+**IMPORTANT**: the GitHub user needs to be an admin of the repo to be able to add, enable or disable the web hook used by Fourchette. You could create it by hand if you prefer.
+
 ### Enable your Fourchette instance
 
 run `bundle exec rake fourchette:enable`
