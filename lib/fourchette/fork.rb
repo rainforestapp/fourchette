@@ -38,7 +38,12 @@ class Fourchette::Fork
 
     # TODO - HACK ALERT - Next couple lines are really hacky, and used
     # instead of calling `git push heroku my_branch_name:master`
-    repo.branch('master').delete
+    begin
+      repo.branch('master').delete
+    rescue Git::GitExecuteError
+      # There is no master branch? Hmmm
+    end
+    
     begin
       repo.branch('master').merge(branch_name)
     rescue Git::GitExecuteError
