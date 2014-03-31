@@ -8,7 +8,7 @@ gem 'sinatra-contrib', '~> 1.4.2'
 
 gem 'octokit', '~> 3.0.0'
 gem 'git', '~> 1.2.6'
-gem 'heroics', '~> 0.0.2'
+gem 'heroics', '0.0.2'
 gem 'heroku', '~> 3.3.0' # Deprecated, but best/easiest solution for the pgbackups...
 
 gem 'sucker_punch', '~> 1.0.2'

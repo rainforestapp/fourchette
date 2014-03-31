@@ -115,7 +115,7 @@ DEPENDENCIES
   coveralls
   foreman (~> 0.63.0)
   git (~> 1.2.6)
-  heroics (~> 0.0.2)
+  heroics (= 0.0.2)
   heroku (~> 3.3.0)
   octokit (~> 3.0.0)
   pry-debugger
