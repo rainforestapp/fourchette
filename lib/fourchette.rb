@@ -1,3 +1,4 @@
+require "fourchette/version"
 require 'sinatra'
 require 'json'
 require 'cgi' # Required for Heroics
