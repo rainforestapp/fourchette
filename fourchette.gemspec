@@ -20,7 +20,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "bundler", "~> 1.5"
   spec.add_dependency "rake"
-  spec.add_dependency "puma", "~> 2.7.1"
   spec.add_dependency "sinatra", "~> 1.4.4"
   spec.add_dependency "sinatra-contrib", "~> 1.4.2"
   spec.add_dependency "octokit", "~> 3.0.0"
