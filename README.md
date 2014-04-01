@@ -39,10 +39,13 @@ Seriously? You need a diagram for that? Nope. Not going to do this. PRs accepted
 
 Those steps could be made way easier, but this is a really minimal implementation.
 
-1. clone this repo (`git clone git@github.com:jipiboily/fourchette.git`)
-2. push to Heroku
-3. configure the right environement variables (see [#configuration](#configuration))
-4. Enable your Fourchette instance
+1. Add `gem 'fourchette'` to your `Gemfile`
+2. Run `bundle install`
+3. Add `require 'fourchette/rake_tasks'` to your `Rakefile`
+4. Create a `Procfile` and a `config.ru` (using the ones from this repo as example)
+5. push to Heroku
+6. configure the right environement variables (see [#configuration](#configuration))
+7. Enable your Fourchette instance
 
 ### Configuration
 
@@ -65,11 +68,13 @@ run `bundle exec rake fourchette:enable`
 
 `bundle exec rake -T` will tell you the rake tasks available. There are tasks to enable, disable or delete the GitHub hook to your Fourchette instance. There is also one to update the hook. That last one is mostly for development, if your local tunnel URl changed and you want to update the hook's URL.
 
-### Before & after steps
+### Before & after steps, aka, callbacks
 
 You need to run steps before and/or after the creation of your new Heroku app? Let's say you want to run mirgations after deploying new code. There is a simple (and primitive) way of doing it. It might not be perfect but can work until there is a cleaner and more flexible way of doing so, if required.
 
-Basically, you just want to modify the `before` or `after` methods of `Fourchette::Callbacks` (`lib/fourchette/callbacks.rb`) to suit your needs. In those methods, you have access to GitHub's hook data via the `@param` instance variable.
+Create a file in your project to override the `Fourchette::Callbacks` class and include it after Fourchette.
+
+You just want to override the `before` or `after` methods of `Fourchette::Callbacks` (`lib/fourchette/callbacks.rb`) to suit your needs. In those methods, you have access to GitHub's hook data via the `@param` instance variable.
 
 ## Rake tasks
 
@@ -99,9 +104,8 @@ Bonus: if you need a tunnel to your local dev machine to work with GitHub hooks,
 What needs to be improved?
 
 - currently, it is assuming everything goes well, very little to no error management. This needs to improved.
+- make it simpler to bootstrap a Fourchette app (possibily a rake task to generate the required files and callback overrides)
 - it is not serious until there are specs for it, so add specs for that once we have a solid direction
-- make it a gem
-  - improve how to deal with callbacks as part of making this a gem
 - security improvements (we should not accept hooks from anyone else than GitHub)
 - oAuth instead of GitHub token?
 - multi project would be great
