@@ -10,7 +10,14 @@ require 'sucker_punch'
 # TODO: Extract this to development.rb and production.rb
 if development?
   require "sinatra/reloader"
-  require "pry"
+  
+  begin
+    require "pry"
+  rescue LoadError => ex
+    # That's ok, we don't care...it was probably loaded from another project
+    # and not to hack on Fourchette anyways!
+  end
+  
   FOURCHETTE_CONFIG = {
     env_name: 'fourchette-dev'
   }
