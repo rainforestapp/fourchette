@@ -2,6 +2,16 @@ PATH
   remote: .
   specs:
     fourchette (0.0.1)
+      bundler (~> 1.5)
+      git (~> 1.2.6)
+      heroics (= 0.0.2)
+      heroku (~> 3.3.0)
+      octokit (~> 3.0.0)
+      puma (~> 2.7.1)
+      rake
+      sinatra (~> 1.4.4)
+      sinatra-contrib (~> 1.4.2)
+      sucker_punch (~> 1.0.2)
 
 GEM
   remote: http://rubygems.org/
@@ -117,18 +127,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.5)
   coveralls
   foreman (~> 0.63.0)
   fourchette!
-  git (~> 1.2.6)
-  heroics (= 0.0.2)
-  heroku (~> 3.3.0)
-  octokit (~> 3.0.0)
   pry-debugger
-  puma (~> 2.7.1)
-  rake
   rspec (~> 2.14.1)
-  sinatra (~> 1.4.4)
-  sinatra-contrib (~> 1.4.2)
-  sucker_punch (~> 1.0.2)

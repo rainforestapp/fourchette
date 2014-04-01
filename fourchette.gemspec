@@ -28,4 +28,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency "heroics", "0.0.2"
   spec.add_dependency "heroku", "~> 3.3.0" # Deprecated, but best/easiest solution for the pgbackups...
   spec.add_dependency "sucker_punch", "~> 1.0.2"
+
+  spec.add_development_dependency 'foreman', '~> 0.63.0'
+  spec.add_development_dependency 'pry-debugger'
+  spec.add_development_dependency 'rspec', '~> 2.14.1'
+  spec.add_development_dependency 'coveralls'
 end
