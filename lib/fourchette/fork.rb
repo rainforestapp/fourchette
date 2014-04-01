@@ -76,20 +76,7 @@ class Fourchette::Fork
     # Update PR with URL
     github.comment_pr(pr_number, "Test app deleted!")
   end
-
-  private
-  def github
-    @github ||= Fourchette::GitHub.new
-  end
-
-  def create_unless_exists
-    unless @heroku.app_exists?(fork_name)
-      @heroku.fork(ENV['FOURCHETTE_HEROKU_APP_TO_FORK'] ,fork_name)
-      # Update PR with URL
-      github.comment_pr(pr_number, "Test URL: #{@heroku.client.app.info(fork_name)['web_url']}")
-    end
-  end
-
+  
   def fork_name
     "#{ENV['FOURCHETTE_HEROKU_APP_PREFIX']}-PR-#{pr_number}".downcase # It needs to be lowercase only.
   end
@@ -104,5 +91,18 @@ class Fourchette::Fork
 
   def pr_number
     @pr_number ||= @params['pull_request']['number']
+  end
+
+  private
+  def github
+    @github ||= Fourchette::GitHub.new
+  end
+
+  def create_unless_exists
+    unless @heroku.app_exists?(fork_name)
+      @heroku.fork(ENV['FOURCHETTE_HEROKU_APP_TO_FORK'] ,fork_name)
+      # Update PR with URL
+      github.comment_pr(pr_number, "Test URL: #{@heroku.client.app.info(fork_name)['web_url']}")
+    end
   end
 end
