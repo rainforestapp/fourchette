@@ -99,6 +99,14 @@ Fourchette uses [Sucker Punch](https://github.com/brandonhilkert/sucker_punch), 
 
 Bonus: if you need a tunnel to your local dev machine to work with GitHub hooks, you might want to look at https://ngrok.com/.
 
+### Logging
+
+If you want the maximum output in your GitHub comments, set this environment variable:
+
+```
+export DEBUG='true'
+```
+
 ## It needs some love...
 
 What needs to be improved?

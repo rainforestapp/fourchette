@@ -29,6 +29,7 @@ end
 
 
 module Fourchette
+  DEBUG = ENV['DEBUG'] ? true : false
 end
 
 require_relative 'fourchette/logger'

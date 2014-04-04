@@ -65,7 +65,7 @@ class Fourchette::Fork
   end
 
   def create
-    github.comment_pr(pr_number, "Fourchette is initializing a new fork.")
+    github.comment_pr(pr_number, "Fourchette is initializing a new fork.") if Fourchette::DEBUG
     create_unless_exists
     update
   end

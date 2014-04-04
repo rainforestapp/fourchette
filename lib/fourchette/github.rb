@@ -30,7 +30,7 @@ class Fourchette::GitHub
   end
 
   def comment_pr pr_number, comment
-    comment = "****** FOURCHETTE COMMENT ******\n\n#{comment}\n\n****** END OF FOURCHETTE COMMENT ******"
+    comment = "****** FOURCHETTE COMMENT ******\n\n#{comment}\n\n****** END OF FOURCHETTE COMMENT ******" if Fourchette::DEBUG
     octokit.add_comment(ENV['FOURCHETTE_GITHUB_PROJECT'], pr_number, comment)
   end
 
