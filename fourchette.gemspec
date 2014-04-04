@@ -18,17 +18,16 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "bundler", "~> 1.5"
   spec.add_dependency "rake"
-  spec.add_dependency "sinatra", "~> 1.4.4"
-  spec.add_dependency "sinatra-contrib", "~> 1.4.2"
-  spec.add_dependency "octokit", "~> 3.0.0"
-  spec.add_dependency "git", "~> 1.2.6"
+  spec.add_dependency "sinatra"
+  spec.add_dependency "sinatra-contrib"
+  spec.add_dependency "octokit"
+  spec.add_dependency "git"
   spec.add_dependency "heroics", "0.0.2"
-  spec.add_dependency "heroku", "~> 3.3.0" # Deprecated, but best/easiest solution for the pgbackups...
-  spec.add_dependency "sucker_punch", "~> 1.0.2"
+  spec.add_dependency "heroku" # Deprecated, but best/easiest solution for the pgbackups...
+  spec.add_dependency "sucker_punch"
 
-  spec.add_development_dependency 'foreman', '~> 0.63.0'
+  spec.add_development_dependency 'foreman'
   spec.add_development_dependency 'pry-debugger'
   spec.add_development_dependency 'rspec', '~> 2.14.1'
   spec.add_development_dependency 'coveralls'
