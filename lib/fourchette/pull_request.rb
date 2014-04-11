@@ -8,7 +8,7 @@ class Fourchette::PullRequest
     callbacks.before
 
     case params['action']
-    when 'synchronize' # new push against the PR
+    when 'synchronize' # new push against the PR (updating code, basically)
       fork.update
     when 'closed'
       fork.delete
