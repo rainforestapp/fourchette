@@ -3,11 +3,11 @@ class Fourchette::PullRequest
 
   def perform params
     callbacks = Fourchette::Callbacks.new(params)
-    @params = params
+    fork = Fourchette::Fork.new(params)
 
     callbacks.before
 
-    case action
+    case params['action']
     when 'synchronize' # new push against the PR
       fork.update
     when 'closed'
@@ -19,13 +19,5 @@ class Fourchette::PullRequest
     end
 
     callbacks.after
-  end
-
-  def action
-    @params['action']
-  end
-
-  def fork
-    @fork ||= Fourchette::Fork.new(@params)
   end
 end
