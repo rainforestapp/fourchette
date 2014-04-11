@@ -4,6 +4,7 @@ class Fourchette::Fork
   def initialize params
     @params = params
     @heroku = Fourchette::Heroku.new
+    @github = Fourchette::GitHub.new
   end
 
   def update
@@ -65,7 +66,7 @@ class Fourchette::Fork
   end
 
   def create
-    github.comment_pr(pr_number, "Fourchette is initializing a new fork.") if Fourchette::DEBUG
+    @github.comment_pr(pr_number, "Fourchette is initializing a new fork.") if Fourchette::DEBUG
     create_unless_exists
     update
   end
@@ -74,7 +75,7 @@ class Fourchette::Fork
     @heroku.delete(fork_name)
 
     # Update PR with URL
-    github.comment_pr(pr_number, "Test app deleted!")
+    @github.comment_pr(pr_number, "Test app deleted!")
   end
   
   def fork_name
@@ -86,23 +87,19 @@ class Fourchette::Fork
   end
 
   def branch_name
-    @branch_name ||= "remotes/origin/#{@params['pull_request']['head']['ref']}"
+    "remotes/origin/#{@params['pull_request']['head']['ref']}"
   end
 
   def pr_number
-    @pr_number ||= @params['pull_request']['number']
+    @params['pull_request']['number']
   end
 
   private
-  def github
-    @github ||= Fourchette::GitHub.new
-  end
-
   def create_unless_exists
     unless @heroku.app_exists?(fork_name)
       @heroku.fork(ENV['FOURCHETTE_HEROKU_APP_TO_FORK'] ,fork_name)
       # Update PR with URL
-      github.comment_pr(pr_number, "Test URL: #{@heroku.client.app.info(fork_name)['web_url']}")
+      @github.comment_pr(pr_number, "Test URL: #{@heroku.client.app.info(fork_name)['web_url']}")
     end
   end
 end
