@@ -8,6 +8,7 @@
   <a href="https://codeclimate.com/github/jipiboily/fourchette"><img src="https://codeclimate.com/github/jipiboily/fourchette.png" /></a>
   <a href="https://github.com/jipiboily/fourchette"><img src="https://travis-ci.org/jipiboily/fourchette.png?branch=master" /></a>
   <a href='https://coveralls.io/r/jipiboily/fourchette'><img src='https://coveralls.io/repos/jipiboily/fourchette/badge.png' alt='Coverage Status' /></a>
+  <a href="http://badge.fury.io/rb/fourchette"><img src="https://badge.fury.io/rb/fourchette.svg" alt="Gem Version" height="18"></a>
 </p>
 
 **IMPORTANT: this is a work in progress, use at your own risk.**
