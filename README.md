@@ -38,6 +38,8 @@ Seriously? You need a diagram for that? Nope. Not going to do this. PRs accepted
 
 Those steps could be made way easier, but this is a really minimal implementation.
 
+If you want to see a sample app using fourchette, [head this way](https://github.com/rainforestapp/fourchette).
+
 1. Add `gem 'fourchette'` to your `Gemfile`
 2. Run `bundle install`
 3. Add `require 'fourchette/rake_tasks'` to your `Rakefile`
