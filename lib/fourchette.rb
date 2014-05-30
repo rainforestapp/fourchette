@@ -29,6 +29,8 @@ end
 
 module Fourchette
   DEBUG = ENV['DEBUG'] ? true : false
+
+  class DeployException < StandardError; end
 end
 
 require_relative 'fourchette/logger'

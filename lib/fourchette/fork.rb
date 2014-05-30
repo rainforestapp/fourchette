@@ -16,7 +16,17 @@ class Fourchette::Fork
         }
     }
 
-    @heroku.client.build.create(fork_name, options)
+    build = @heroku.client.build.create(fork_name, options)
+    monitor_build(build)
+  end
+
+  def monitor_build build
+    build_info = @heroku.client.build.info(fork_name, build['id'])
+    while build_info['status'] == 'pending'
+      build_info = @heroku.client.build.info(fork_name, build['id'])
+      sleep 5
+    end
+    fail Fourchette::DeployException if build_info['status'] == 'failed'
   end
 
   def create
