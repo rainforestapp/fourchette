@@ -1,3 +1,3 @@
 require 'fourchette'
-require 'callbacks'
+require_relative 'callbacks'
 run Sinatra::Application
