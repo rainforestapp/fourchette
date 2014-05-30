@@ -12,7 +12,7 @@ module Fourchette
       empty_directory(name)
 
       # Copy template files
-      ['Gemfile','config.ru', 'Procfile', 'Rakefile', 'config/puma.rb'].each do |file_name|
+      ['Gemfile','config.ru', 'Procfile', 'Rakefile', 'config/puma.rb', 'callbacks.rb'].each do |file_name|
         copy_file(file_name, "#{name}/#{file_name}")
       end
 
