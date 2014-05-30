@@ -6,10 +6,10 @@ class Fourchette::Callbacks
   end
 
   def before
-    logger.info 'Running before steps...'
+    logger.info 'Placeholder for before steps...'
   end
 
   def after
-    logger.info 'Running after steps...'
+    logger.info 'Placeholder for after steps...'
   end
 end
