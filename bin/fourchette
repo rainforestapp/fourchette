@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require "thor"
+
+module Fourchette
+  class CLI < Thor
+    include Thor::Actions
+
+    desc "new APP_NAME", "This will create a fourchette app for you under APP_NAME directory."
+    def new(name)
+      # Create directory
+      empty_directory(name)
+
+      # Copy template files
+      ['Gemfile','config.ru', 'Procfile', 'Rakefile', 'config/puma.rb'].each do |file_name|
+        copy_file(file_name, "#{name}/#{file_name}")
+      end
+
+      # Run bundle install
+      run("bundle install --gemfile #{name}/Gemfile")
+    end
+  end 
+end
+
+Fourchette::CLI.source_root(File.expand_path("../../templates", __FILE__))
+Fourchette::CLI.start(ARGV)

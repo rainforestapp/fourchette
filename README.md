@@ -15,7 +15,21 @@ Fourchette is your new best friend for having isolated testing environements. It
 
 **IMPORTANT: Please note that forking your Heroku app means it will copy the same addon plans and that you will pay for multiple apps and their addons. Watch out!**
 
-## Flow
+## Table of content
+1. How does that work exactly?
+- Features
+- Installation
+  * Configuration
+  * Enable your Fourchette instance
+  * Enable, disable, update or delete the hook
+  * Before & after steps, aka, callbacks
+- Rake tasks
+- Async processing note
+- Contribute
+  - Logging
+- Contributors
+
+## How does that work exactly?
 
 - a PR is created against your GitHub project
 - Fourchette receives an event via GitHub Hooks
@@ -24,26 +38,12 @@ Fourchette is your new best friend for having isolated testing environements. It
 - closing the PR will delete the forked app
 - re-opening the PR will re-create a fork
 
-## Diagram
-
-Seriously? You need a diagram for that? Nope. Not going to do this. PRs accepted...I guess.
-
-## Features
-- single project
-- configuration is made via environement variables
-- async processing
-- it works, but that's about it for now
-
 ## Installation
 
-Those steps could be made way easier, but this is a really minimal implementation.
-
-If you want to see a sample app using fourchette, [head this way](https://github.com/rainforestapp/fourchette).
-
-1. Add `gem 'fourchette'` to your `Gemfile`
-2. Run `bundle install`
-3. Add `require 'fourchette/rake_tasks'` to your `Rakefile`
-4. Create a `Procfile` and a `config.ru` (using the ones from this repo as example)
+1. run `gem install fourchette`
+2. run `fourchette new my-app-name`. You can replace "my-app-name" by whatever you want it, this is the name of the directory your Fourchette app will be created in.
+3. run `cd my-app-name` (replace app name, again)
+4. run `git init && git add . && git commit -m "Initial commit :tada:"`
 5. push to Heroku
 6. configure the right environement variables (see [#configuration](#configuration))
 7. Enable your Fourchette instance
@@ -106,17 +106,6 @@ If you want the maximum output in your GitHub comments, set this environment var
 ```
 export DEBUG='true'
 ```
-
-## It needs some love...
-
-What needs to be improved?
-
-- currently, it is assuming everything goes well, very little to no error management. This needs to improved.
-- make it simpler to bootstrap a Fourchette app (possibily a rake task to generate the required files and callback overrides)
-- it is not serious until there are specs for it, so add specs for that once we have a solid direction
-- security improvements (we should not accept hooks from anyone else than GitHub)
-- oAuth instead of GitHub token?
-- multi project would be great
 
 # Contributors
 

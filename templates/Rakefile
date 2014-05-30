@@ -1,0 +1,1 @@
+require 'fourchette/rake_tasks'
