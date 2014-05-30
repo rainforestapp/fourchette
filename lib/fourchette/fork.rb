@@ -10,8 +10,6 @@ class Fourchette::Fork
   def update
     create_unless_exists
 
-    heroku_git_url = @heroku.git_url(fork_name)
-
     options = {
       source_blob: {
           url: "https://github.com/#{ENV['FOURCHETTE_GITHUB_PROJECT']}/archive/#{branch_name}.tar.gz?token=#{ENV['FOURCHETTE_GITHUB_PERSONAL_TOKEN']}"
@@ -36,10 +34,6 @@ class Fourchette::Fork
   
   def fork_name
     "#{ENV['FOURCHETTE_HEROKU_APP_PREFIX']}-PR-#{pr_number}".downcase # It needs to be lowercase only.
-  end
-
-  def github_git_url
-    @params['pull_request']['head']['repo']['clone_url'].gsub("//github.com", "//#{ENV['FOURCHETTE_GITHUB_USERNAME']}:#{ENV['FOURCHETTE_GITHUB_PERSONAL_TOKEN']}@github.com")
   end
 
   def branch_name
