@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "heroku" # Deprecated, but best/easiest solution for the pgbackups...
   spec.add_dependency 'platform-api', '~> 0.2.0'
   spec.add_dependency "sucker_punch"
+  spec.add_dependency "thor"
 
   spec.add_development_dependency 'foreman'
   spec.add_development_dependency 'pry-debugger'
