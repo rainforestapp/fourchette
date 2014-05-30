@@ -72,7 +72,7 @@ class Fourchette::GitHub
 
   def enable(hook)
     if hook.active
-      logger.error 'The hook is already active, dude!'
+      logger.error 'The hook is already active!'
     else
       toggle_active_state_to hook, true
     end
