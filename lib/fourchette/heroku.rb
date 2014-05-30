@@ -18,13 +18,9 @@ class Fourchette::Heroku
   end
 
   def client
-    # TODO: add caching... https://github.com/heroku/heroics/#client-side-caching
     unless @heroku_client
-      username = CGI.escape(ENV['FOURCHETTE_HEROKU_USERNAME'])
-      token = ENV['FOURCHETTE_HEROKU_API_KEY']
-      url = "https://#{username}:#{token}@api.heroku.com/schema"
-      options = {default_headers: {'Accept' => 'application/vnd.heroku+json; version=3'}}
-      @heroku_client = Heroics.client_from_schema_url(url, options)
+      api_key = ENV['FOURCHETTE_HEROKU_API_KEY']
+      @heroku_client = PlatformAPI.connect(api_key)
     end
     @heroku_client
   end

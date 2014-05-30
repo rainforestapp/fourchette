@@ -53,7 +53,6 @@ If you want to see a sample app using fourchette, [head this way](https://github
 - `export FOURCHETTE_GITHUB_PROJECT="jipiboily/fourchette"`
 - `export FOURCHETTE_GITHUB_USERNAME="jipiboily"`
 - `export FOURCHETTE_GITHUB_PERSONAL_TOKEN='a token here...'` # You can create one here: https://github.com/settings/applications
-- `export FOURCHETTE_HEROKU_USERNAME='me@domain'`
 - `export FOURCHETTE_HEROKU_API_KEY='API key here'`
 - `export FOURCHETTE_HEROKU_APP_TO_FORK='the name of the app to fork from'`
 - `export FOURCHETTE_APP_URL="http://fourchette-app.herokuapp.com"`

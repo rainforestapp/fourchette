@@ -1,8 +1,7 @@
 require "fourchette/version"
 require 'sinatra'
 require 'json'
-require 'cgi' # Required for Heroics
-require 'heroics'
+require 'platform-api'
 require 'octokit'
 require 'git'
 require 'sucker_punch'
