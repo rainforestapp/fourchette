@@ -7,11 +7,11 @@ class Fourchette::Callbacks
     @params = params
   end
 
-  def before
+  def before_all
     logger.info 'Placeholder for before steps... (see callbacks.rb to override)'
   end
 
-  def after
+  def after_all
     logger.info 'Placeholder for after steps... (see callbacks.rb to override)'
   end
 end
