@@ -35,7 +35,7 @@ class Fourchette::GitHub
   end
 
   def get_archive_link_for(branch)
-    github.archive_link(ENV['FOURCHETTE_GITHUB_PROJECT'], ref: branch)
+    octokit.archive_link(ENV['FOURCHETTE_GITHUB_PROJECT'], ref: branch)
   end
 
   private
