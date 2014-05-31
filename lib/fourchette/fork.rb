@@ -12,7 +12,7 @@ class Fourchette::Fork
 
     options = {
       source_blob: {
-          url: "https://github.com/#{ENV['FOURCHETTE_GITHUB_PROJECT']}/archive/#{branch_name}.tar.gz?token=#{ENV['FOURCHETTE_GITHUB_PERSONAL_TOKEN']}"
+          url: @github.get_archive_link_for(branch_name)
         }
     }
 

@@ -34,6 +34,10 @@ class Fourchette::GitHub
     octokit.add_comment(ENV['FOURCHETTE_GITHUB_PROJECT'], pr_number, comment)
   end
 
+  def get_archive_link_for(branch)
+    github.archive_link(ENV['FOURCHETTE_GITHUB_PROJECT'], ref: branch)
+  end
+
   private
   def octokit
     @octokit_client ||= Octokit::Client.new(login: ENV['FOURCHETTE_GITHUB_USERNAME'], password: ENV['FOURCHETTE_GITHUB_PERSONAL_TOKEN'])
