@@ -22,16 +22,14 @@ class Fourchette::Fork
 
   def monitor_build build
     logger.info "Start of the build process on Heroku..."
-    start_time = Time.now
     build_info = @heroku.client.build.info(fork_name, build['id'])
-    while build_info['status'] == 'pending'
-      break if start_time - Time.now > 1800
-      build_info = @heroku.client.build.info(fork_name, build['id'])
-      sleep 5
+    # Let's just leave some time to Heroku to download the tarball and start 
+    # the process. This is some random timing that seems to make sense at first.
+    sleep 30
+    if build_info['status'] == 'failed'
+      @github.comment_pr(pr_number, "The build failed on Herok. See the activity tab on Heroku.")
+      fail Fourchette::DeployException
     end
-    fail Fourchette::DeployException if build_info['status'] == 'failed'
-    fail Fourchette::DeployPendingTimeout if build_info['status'] == 'pending'
-    logger.info "End of the build process on Heroku..."
   end
 
   def create

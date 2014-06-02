@@ -31,7 +31,6 @@ module Fourchette
   DEBUG = ENV['DEBUG'] ? true : false
 
   class DeployException < StandardError; end
-  class DeployPendingTimeout < StandardError; end
 end
 
 require_relative 'fourchette/logger'
