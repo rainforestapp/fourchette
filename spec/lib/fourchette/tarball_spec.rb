@@ -33,7 +33,7 @@ describe Fourchette::Tarball do
 
     it 'creates the tarball' do
       subject.unstub(:tar)
-      subject.should_receive(:system).with 'tar -zcvf tmp/1234567/123.tar.gz tmp/1234567'
+      subject.should_receive(:system).with 'tar -zcvf tmp/1234567/123.tar.gz -C tmp/1234567 .'
       subject.url(git_repo_url, branch_name, github_repo)
     end
   end
