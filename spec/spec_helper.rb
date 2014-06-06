@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'coveralls'
+require 'rack/test'
 Coveralls.wear!
 
 require_relative '../lib/fourchette'

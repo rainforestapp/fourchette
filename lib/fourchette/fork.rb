@@ -9,10 +9,11 @@ class Fourchette::Fork
 
   def update
     create_unless_exists
-
+    tarball = Fourchette::Tarball.new
+    tarball_url = tarball.url(github_git_url, git_branch_name, ENV['FOURCHETTE_GITHUB_PROJECT'])
     options = {
       source_blob: {
-          url: @github.get_archive_link_for(branch_name)
+          url: tarball_url
         }
     }
 
@@ -64,5 +65,13 @@ class Fourchette::Fork
       # Update PR with URL
       @github.comment_pr(pr_number, "Test URL: #{@heroku.client.app.info(fork_name)['web_url']}")
     end
+  end
+
+  def git_branch_name
+    "remotes/origin/#{branch_name}"
+  end
+
+  def github_git_url
+    @params['pull_request']['head']['repo']['clone_url'].gsub("//github.com", "//#{ENV['FOURCHETTE_GITHUB_USERNAME']}:#{ENV['FOURCHETTE_GITHUB_PERSONAL_TOKEN']}@github.com")
   end
 end
