@@ -26,7 +26,7 @@ describe Fourchette::Tarball do
     it 'clones the repo and checkout the branch' do
       subject.unstub(:clone)
       git_instance = double
-      Git.should_receive(:clone).with(git_repo_url, "tmp/1234567").and_return(git_instance)
+      Git.should_receive(:clone).with(git_repo_url, "tmp/1234567", recursive: true).and_return(git_instance)
       git_instance.should_receive(:checkout).with(branch_name)
       subject.url(git_repo_url, branch_name, github_repo)
     end

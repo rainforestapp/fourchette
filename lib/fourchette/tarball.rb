@@ -20,7 +20,7 @@ class Fourchette::Tarball
 
   def clone(github_git_url,branch_name, clone_path)
     logger.info "Cloning repository..."
-    repo = Git.clone(github_git_url, clone_path)
+    repo = Git.clone(github_git_url, clone_path, recursive: true)
     repo.checkout(branch_name)
   end
 
