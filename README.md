@@ -16,18 +16,17 @@ Fourchette is your new best friend for having isolated testing environements. It
 **IMPORTANT: Please note that forking your Heroku app means it will copy the same addon plans and that you will pay for multiple apps and their addons. Watch out!**
 
 ## Table of content
-1. How does that work exactly?
-- Features
-- Installation
-  * Configuration
-  * Enable your Fourchette instance
-  * Enable, disable, update or delete the hook
-  * Before & after steps, aka, callbacks
-- Rake tasks
-- Async processing note
-- Contribute
-  - Logging
-- Contributors
+1. [How does that work exactly?](#how-does-that-work-exactly)
+- [Installation](#installation)
+  * [Configuration](#configuration)
+  * [Enable your Fourchette instance](#enable-your-fourchette-instance)
+  * [Enable, disable, update or delete the hook](#enable-disable-update-or-delete-the-hook)
+  * [Before & after steps, aka, callbacks](#before--after-steps-aka-callbacks)
+- [Rake tasks](#rake-tasks)
+- [Async processing note](#async-processing-note)
+- [Contribute](#contribute)
+  - [Logging](#logging)
+- [Contributors](#contributors)
 
 ## How does that work exactly?
 
