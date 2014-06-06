@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe Fourchette::Tarball do
+  subject { described_class.new }
+
   describe '#url' do
-    subject { described_class.new }
-    
     let(:git_repo_url) { 'git://github.com/jipiboily/fourchette.git' }
     let(:github_repo) { 'jipiboily/fourchette' }
     let(:branch_name) { 'feature/something-new' }
-    
+
     before do
       subject.stub(:expiration_timestamp).and_return('123')
       subject.stub(:clone)
@@ -36,5 +36,9 @@ describe Fourchette::Tarball do
       subject.should_receive(:system).with 'tar -zcvf tmp/1234567/123.tar.gz tmp/1234567'
       subject.url(git_repo_url, branch_name, github_repo)
     end
+  end
+
+  describe '#filepath' do
+    it { expect(subject.filepath('1234567', '123')).to eq 'tmp/1234567/123.tar.gz' }
   end
 end

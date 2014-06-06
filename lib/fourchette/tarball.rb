@@ -7,6 +7,10 @@ class Fourchette::Tarball
     tarball_to_url(filepath, github_repo)
   end
 
+  def filepath(uuid, expiration)
+    "tmp/#{uuid}/#{expiration}.tar.gz"
+  end
+
   private
   def prepare_tarball(github_git_url, branch_name)
     clone_path = "tmp/#{SecureRandom.uuid}"
