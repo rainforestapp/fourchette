@@ -27,7 +27,7 @@ class Fourchette::Tarball
   def tar(path)
     logger.info "Preparing tarball..."
     filepath = "#{path}/#{expiration_timestamp}.tar.gz"
-    system("tar -zcvf #{filepath} -C #{path} .")
+    system("tar -zcf #{filepath} -C #{path} .")
     filepath
   end
 
