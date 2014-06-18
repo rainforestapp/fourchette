@@ -10,6 +10,7 @@ class Fourchette::Heroku
     copy_config(from, to)
     copy_add_ons(from, to)
     copy_pg(from, to)
+    copy_RACK_AND_RAILS_ENV_again(from, to)
   end
 
   def delete app_name
@@ -65,5 +66,22 @@ class Fourchette::Heroku
     logger.info "Copying Postgres's data from #{from} to #{to}"
     backup = Fourchette::Pgbackups.new
     backup.copy(from, to)
+  end
+
+  def copy_RACK_AND_RAILS_ENV_again(from, to)
+    env_to_update = get_original_env(from)
+    unless env_to_update.empty?
+      client.config_var.update(to, env_to_update)
+    end
+  end
+
+  def get_original_env(from)
+    environments = {}
+    ['RACK_ENV', 'RAILS_ENV'].each do |var|
+      if client.config_var.info(from)[var]
+        environments[var] = client.config_var.info(from)[var]
+      end
+    end
+    environments
   end
 end

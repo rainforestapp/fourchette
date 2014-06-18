@@ -32,9 +32,10 @@ describe Fourchette::Heroku do
       heroku.stub(:copy_config)
       heroku.stub(:copy_add_ons)
       heroku.stub(:copy_pg)
+      heroku.stub(:copy_RACK_AND_RAILS_ENV_again)
     end
 
-    ['create_app', 'copy_config', 'copy_add_ons', 'copy_pg'].each do |method_name|
+    ['create_app', 'copy_config', 'copy_add_ons', 'copy_pg', 'copy_RACK_AND_RAILS_ENV_again'].each do |method_name|
       it "calls `#{method_name}'" do
         heroku.should_receive(method_name)
         heroku.fork(from_app_name, to_app_name)
@@ -108,6 +109,42 @@ describe Fourchette::Heroku do
     it 'calls Fourchette::Pgbackups#copy' do
       Fourchette::Pgbackups.any_instance.should_receive(:copy).with(from_app_name, to_app_name)
       heroku.copy_pg(from_app_name, to_app_name)
+    end
+  end
+
+  describe '#copy_RACK_AND_RAILS_ENV_again' do
+    context 'with RACK_ENV or RAILS_ENV setup' do
+      before do
+        heroku.stub(:get_original_env).and_return({ 'RACK_ENV' => 'qa' })
+      end
+
+      it 'updates the config vars' do
+        heroku.client.config_var.should_receive(:update).with(to_app_name,  { 'RACK_ENV' => 'qa' })
+        heroku.copy_RACK_AND_RAILS_ENV_again(from_app_name, to_app_name)
+      end
+    end
+
+    context 'with NO env setup' do
+      before do
+        heroku.stub(:get_original_env).and_return({})
+      end
+
+      it 'does not update config vars' do
+        heroku.client.config_var.should_not_receive(:update)
+        heroku.copy_RACK_AND_RAILS_ENV_again(from_app_name, to_app_name)
+      end
+    end
+  end
+
+  describe '#get_original_env' do
+    before do
+      stub_cong_var = { 'RACK_ENV' => 'qa', 'RAILS_ENV' => 'staging', 'DATABASE_URL' => 'postgres://....' }
+      heroku.stub_chain(:client, :config_var, :info).and_return(stub_cong_var)
+    end
+
+    it 'returns the set env vars' do
+      return_value = heroku.get_original_env(from_app_name)
+      expect(return_value).to eq({'RACK_ENV' => 'qa', 'RAILS_ENV' => 'staging'})
     end
   end
 end
