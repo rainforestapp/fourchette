@@ -33,7 +33,6 @@ class Fourchette::Heroku
     client.app.info(app_name)['git_url']
   end
 
-  private
   def create_app name
     logger.info "Creating #{name}"
     client.app.create({ name: name })

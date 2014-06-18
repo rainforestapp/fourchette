@@ -60,56 +60,54 @@ describe Fourchette::Heroku do
     end
   end
 
-  describe 'private functions' do
-    describe '#create_app' do
-      it 'calls app.create on the Heroku client' do
-        heroku.client.app.should_receive(:create).with({ name: to_app_name })
-        heroku.send(:create_app, to_app_name)
-      end
+  describe '#create_app' do
+    it 'calls app.create on the Heroku client' do
+      heroku.client.app.should_receive(:create).with({ name: to_app_name })
+      heroku.create_app(to_app_name)
+    end
+  end
+
+  describe '#copy_config' do
+    let(:vars) { { 'WHATEVER' => 'ok', 'HEROKU_POSTGRESQL_SOMETHING_URL' => 'FAIL@POSTGRES/DB' } }
+    let(:cleaned_vars) { { 'WHATEVER' => 'ok'} }
+
+    it 'calls #config_vars' do
+      heroku.client.config_var.stub(:update)
+      heroku.should_receive(:config_vars).with(from_app_name).and_return(vars)
+      heroku.copy_config(from_app_name, to_app_name)
     end
 
-    describe '#copy_config' do
-      let(:vars) { { 'WHATEVER' => 'ok', 'HEROKU_POSTGRESQL_SOMETHING_URL' => 'FAIL@POSTGRES/DB' } }
-      let(:cleaned_vars) { { 'WHATEVER' => 'ok'} }
+    it 'updates config vars without postgres URLs' do
+      heroku.client.config_var.should_receive(:update).with(to_app_name, cleaned_vars )
+      heroku.stub(:config_vars).and_return(vars)
+      heroku.copy_config('from', to_app_name)
+    end
+  end
 
-      it 'calls #config_vars' do
-        heroku.client.config_var.stub(:update)
-        heroku.should_receive(:config_vars).with(from_app_name).and_return(vars)
-        heroku.send(:copy_config, from_app_name, to_app_name)
-      end
+  describe '#copy_add_ons' do
+    let(:addon_list) { [ { 'plan' => { 'name' => 'redistogo' } } ] }
 
-      it 'updates config vars without postgres URLs' do
-        heroku.client.config_var.should_receive(:update).with(to_app_name, cleaned_vars )
-        heroku.stub(:config_vars).and_return(vars)
-        heroku.send(:copy_config, 'from', to_app_name)
-      end
+    before do
+      heroku.client.stub(:addon).and_return( double('addon') )
+      heroku.client.addon.stub(:create)
+      heroku.client.addon.stub(:list).and_return(addon_list)
     end
 
-    describe '#copy_add_ons' do
-      let(:addon_list) { [ { 'plan' => { 'name' => 'redistogo' } } ] }
-
-      before do
-        heroku.client.stub(:addon).and_return( double('addon') )
-        heroku.client.addon.stub(:create)
-        heroku.client.addon.stub(:list).and_return(addon_list)
-      end
-
-      it 'gets the addon list' do
-        heroku.client.addon.should_receive(:list).with(from_app_name).and_return(addon_list)
-        heroku.send(:copy_add_ons, from_app_name, to_app_name)
-      end
-
-      it 'creates addons' do
-        heroku.client.addon.should_receive(:create).with(to_app_name, { plan: 'redistogo' })
-        heroku.send(:copy_add_ons, from_app_name, to_app_name)
-      end
+    it 'gets the addon list' do
+      heroku.client.addon.should_receive(:list).with(from_app_name).and_return(addon_list)
+      heroku.copy_add_ons(from_app_name, to_app_name)
     end
 
-    describe '#copy_pg' do
-      it 'calls Fourchette::Pgbackups#copy' do
-        Fourchette::Pgbackups.any_instance.should_receive(:copy).with(from_app_name, to_app_name)
-        heroku.send(:copy_pg, from_app_name, to_app_name)
-      end
+    it 'creates addons' do
+      heroku.client.addon.should_receive(:create).with(to_app_name, { plan: 'redistogo' })
+      heroku.copy_add_ons(from_app_name, to_app_name)
+    end
+  end
+
+  describe '#copy_pg' do
+    it 'calls Fourchette::Pgbackups#copy' do
+      Fourchette::Pgbackups.any_instance.should_receive(:copy).with(from_app_name, to_app_name)
+      heroku.copy_pg(from_app_name, to_app_name)
     end
   end
 end
