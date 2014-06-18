@@ -28,7 +28,7 @@ class Fourchette::Fork
     # the process. This is some random timing that seems to make sense at first.
     sleep 30
     if build_info['status'] == 'failed'
-      @github.comment_pr(pr_number, "The build failed on Herok. See the activity tab on Heroku.")
+      @github.comment_pr(pr_number, "The build failed on Heroku. See the activity tab on Heroku.")
       fail Fourchette::DeployException
     end
   end
