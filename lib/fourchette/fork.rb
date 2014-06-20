@@ -41,8 +41,6 @@ class Fourchette::Fork
 
   def delete
     @heroku.delete(fork_name)
-
-    # Update PR with URL
     @github.comment_pr(pr_number, "Test app deleted!")
   end
   
