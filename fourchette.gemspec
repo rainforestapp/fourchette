@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor"
 
   spec.add_development_dependency 'foreman'
-  spec.add_development_dependency 'pry-debugger'
+  spec.add_development_dependency 'pry-byebug'
   spec.add_development_dependency 'rspec', '~> 2.14.1'
   spec.add_development_dependency 'guard-rspec'
   spec.add_development_dependency 'terminal-notifier-guard'
