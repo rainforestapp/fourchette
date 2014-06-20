@@ -4,14 +4,18 @@ describe Fourchette::Heroku do
   let(:heroku) { Fourchette::Heroku.new }
   let(:from_app_name) { 'awesome app' }
   let(:to_app_name) { 'awesomer app!' }
+  let(:app_list) do
+    [
+      { 'name' => 'fourchette-pr-7' },
+      { 'name' => 'fourchette-pr-8' }
+    ]
+  end
 
   before do
     client = double('client')
     client_app = double('client')
-    app_list = [ { 'name' => 'fourchette-pr-7' }, { 'name' => 'fourchette-pr-8' } ]
     client_app.stub(:list).and_return(app_list)
     client.stub(:app).and_return(client_app)
-
     config_var = double('config_var')
     client.stub(:config_var).and_return(config_var)
 
