@@ -66,8 +66,10 @@ class Fourchette::Fork
     end
   end
 
+  # Update PR with URL. This is a method so that we can override it and just not
+  # have that, if we don't want. Use case: we have custom domains, so we post
+  # the URLs later on.
   def post_fork_url
-    # Update PR with URL
     @github.comment_pr(pr_number, "Test URL: #{@heroku.client.app.info(fork_name)['web_url']}")
   end
 
