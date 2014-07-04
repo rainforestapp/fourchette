@@ -24,7 +24,7 @@ class Fourchette::Fork
   def monitor_build build
     logger.info "Start of the build process on Heroku..."
     build_info = @heroku.client.build.info(fork_name, build['id'])
-    # Let's just leave some time to Heroku to download the tarball and start 
+    # Let's just leave some time to Heroku to download the tarball and start
     # the process. This is some random timing that seems to make sense at first.
     sleep 30
     if build_info['status'] == 'failed'
@@ -43,7 +43,7 @@ class Fourchette::Fork
     @heroku.delete(fork_name)
     @github.comment_pr(pr_number, "Test app deleted!")
   end
-  
+
   def fork_name
     "#{ENV['FOURCHETTE_HEROKU_APP_PREFIX']}-PR-#{pr_number}".downcase # It needs to be lowercase only.
   end
@@ -56,13 +56,14 @@ class Fourchette::Fork
     @params['pull_request']['number']
   end
 
-  private
   def create_unless_exists
     unless @heroku.app_exists?(fork_name)
       @heroku.fork(ENV['FOURCHETTE_HEROKU_APP_TO_FORK'] ,fork_name)
       post_fork_url
     end
   end
+
+  private
 
   # Update PR with URL. This is a method so that we can override it and just not
   # have that, if we don't want. Use case: we have custom domains, so we post
