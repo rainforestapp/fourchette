@@ -36,6 +36,8 @@ Fourchette is your new best friend for having isolated testing environements. It
   - any new commit against that PR will update the code
 - closing the PR will delete the forked app
 - re-opening the PR will re-create a fork
+ 
+We use it a lot at [Rainforest QA](https://www.rainforestqa.com/). If you want to see a sample Fourchette app, here is one for you to look at: https://github.com/rainforestapp/fourchette.
 
 ## Installation
 
