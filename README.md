@@ -5,10 +5,10 @@
   <br />
   <b>Your new best friend for isolated testing environments on Heroku</b>
   <br />
-  <a href="https://codeclimate.com/github/jipiboily/fourchette"><img src="https://codeclimate.com/github/jipiboily/fourchette.png" /></a>
-  <a href="https://travis-ci.org/jipiboily/fourchette"><img src="https://travis-ci.org/jipiboily/fourchette.png?branch=master" /></a>
-  <a href='https://coveralls.io/r/jipiboily/fourchette'><img src='https://coveralls.io/repos/jipiboily/fourchette/badge.png' alt='Coverage Status' /></a>
-  <a href="http://badge.fury.io/rb/fourchette"><img src="https://badge.fury.io/rb/fourchette.svg" alt="Gem Version" height="18"></a>
+  <a href="https://codeclimate.com/github/jipiboily/fourchette"><img src="http://img.shields.io/codeclimate/github/jipiboily/fourchette.svg?style=flat" /></a>
+  <a href="https://travis-ci.org/jipiboily/fourchette"><img src="http://img.shields.io/travis/jipiboily/fourchette/master.svg?style=flat" /></a>
+  <a href='https://coveralls.io/r/jipiboily/fourchette'><img src='http://img.shields.io/coveralls/jipiboily/fourchette.svg?style=flat' alt='Coverage Status' /></a>
+  <a href="http://badge.fury.io/rb/fourchette"><img src="http://img.shields.io/gem/v/fourchette.svg?style=flat" alt="Gem Version" height="18"></a>
 </p>
 
 Fourchette is your new best friend for having isolated testing environements. It will help you test your GitHub PRs against a fork of one your Heroku apps. You will have one Heroku app per PR now. Isn't that amazing? It will make testing way easier and you won't have the (maybe) broken code from other PRs on staging but only the code that requires testing.
@@ -36,7 +36,7 @@ Fourchette is your new best friend for having isolated testing environements. It
   - any new commit against that PR will update the code
 - closing the PR will delete the forked app
 - re-opening the PR will re-create a fork
- 
+
 We use it a lot at [Rainforest QA](https://www.rainforestqa.com/). If you want to see a sample Fourchette app, here is one for you to look at: https://github.com/rainforestapp/fourchette.
 
 ## Installation
