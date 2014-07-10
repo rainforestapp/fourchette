@@ -93,7 +93,7 @@ describe Fourchette::Heroku do
     let(:addon_list) { [ { 'plan' => { 'name' => 'redistogo' } } ] }
 
     before do
-      heroku.client.stub(:addon).and_return( double('addon') )
+      heroku.client.stub(:addon).and_return(double('addon'))
       heroku.client.addon.stub(:create)
       heroku.client.addon.stub(:list).and_return(addon_list)
     end
@@ -110,9 +110,34 @@ describe Fourchette::Heroku do
   end
 
   describe '#copy_pg' do
-    it 'calls Fourchette::Pgbackups#copy' do
-      Fourchette::Pgbackups.any_instance.should_receive(:copy).with(from_app_name, to_app_name)
-      heroku.copy_pg(from_app_name, to_app_name)
+
+    before do
+      heroku.client.stub(:addon).and_return(double('addon'))
+      heroku.client.addon.stub(:list).and_return(addon_list)
+    end
+
+    context 'when a heroku-postgresql addon is enabled' do
+      let(:addon_list) { [{ 'addon_service' => { 'name' => 'heroku-postgresql' } }] }
+
+      it 'calls Fourchette::Pgbackups#copy' do
+        Fourchette::Pgbackups.any_instance.should_receive(:copy).with(from_app_name, to_app_name)
+        heroku.copy_pg(from_app_name, to_app_name)
+      end
+    end
+
+    context 'when a heroku-postgresql addon is not enabled' do
+      let(:addon_list) { [{ 'addon_service' => { 'name' => 'redistogo' } }] }
+
+      it 'does not call Fourchette::Pgbackups#copy' do
+        # Had to work around lack of support for any_instance and should_not_receive
+        # see https://github.com/rspec/rspec-mocks/issues/164 for more details
+        count = 0
+        Fourchette::Pgbackups.any_instance.stub(:copy) do |from_app_name, to_app_name|
+          count += 1
+        end
+        heroku.copy_pg(from_app_name, to_app_name)
+        count.should eq(0)
+      end
     end
   end
 

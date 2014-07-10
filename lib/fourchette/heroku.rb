@@ -63,9 +63,13 @@ class Fourchette::Heroku
   end
 
   def copy_pg from, to
-    logger.info "Copying Postgres's data from #{from} to #{to}"
-    backup = Fourchette::Pgbackups.new
-    backup.copy(from, to)
+    if pg_enabled?(from)
+      logger.info "Copying Postgres's data from #{from} to #{to}"
+      backup = Fourchette::Pgbackups.new
+      backup.copy(from, to)
+    else
+      logger.info "Postgres not enabled on #{from}. Skipping data copy."
+    end
   end
 
   def copy_RACK_AND_RAILS_ENV_again(from, to)
@@ -83,5 +87,11 @@ class Fourchette::Heroku
       end
     end
     environments
+  end
+
+  def pg_enabled?(app)
+    client.addon.list(app).any? do |addon|
+      addon['addon_service']['name'] == 'heroku-postgresql'
+    end
   end
 end
