@@ -87,6 +87,10 @@ rake fourchette:enable   # This enables Fourchette hook
 rake fourchette:update   # This updates the Fourchette hook with the current URL of the app
 ```
 
+## QA Skip
+
+Adding `[qa skip]` to the title of your pull request will cause Fourchette to ignore the pull request. This is inspired by the `[ci skip]` directive that [various](http://docs.travis-ci.com/user/how-to-skip-a-build/) [ci tools](https://circleci.com/docs/skip-a-build) support.
+
 ## Async processing note
 
 Fourchette uses [Sucker Punch](https://github.com/brandonhilkert/sucker_punch), "a single-process Ruby asynchronous processing library". No need for redis or extra processes. It also mean it can run for free on Heroku, if this is what you want.
