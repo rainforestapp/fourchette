@@ -1,13 +1,13 @@
 <p align="center">
-  <a href="https://github.com/jipiboily/fourchette">
+  <a href="https://github.com/rainforestapp/fourchette">
     <img src="http://i.imgur.com/967yX36.png" alt="Fourchette" />
   </a>
   <br />
   <b>Your new best friend for isolated testing environments on Heroku</b>
   <br />
-  <a href="https://codeclimate.com/github/jipiboily/fourchette"><img src="http://img.shields.io/codeclimate/github/jipiboily/fourchette.svg?style=flat" /></a>
-  <a href="https://travis-ci.org/jipiboily/fourchette"><img src="http://img.shields.io/travis/jipiboily/fourchette/master.svg?style=flat" /></a>
-  <a href='https://coveralls.io/r/jipiboily/fourchette'><img src='http://img.shields.io/coveralls/jipiboily/fourchette.svg?style=flat' alt='Coverage Status' /></a>
+  <a href="https://codeclimate.com/github/rainforestapp/fourchette"><img src="http://img.shields.io/codeclimate/github/rainforestapp/fourchette.svg?style=flat" /></a>
+  <a href="https://travis-ci.org/rainforestapp/fourchette"><img src="http://img.shields.io/travis/rainforestapp/fourchette/master.svg?style=flat" /></a>
+  <a href='https://coveralls.io/r/rainforestapp/fourchette'><img src='http://img.shields.io/coveralls/rainforestapp/fourchette.svg?style=flat' alt='Coverage Status' /></a>
   <a href="http://badge.fury.io/rb/fourchette"><img src="http://img.shields.io/gem/v/fourchette.svg?style=flat" alt="Gem Version" height="18"></a>
 </p>
 
@@ -37,7 +37,7 @@ Fourchette is your new best friend for having isolated testing environements. It
 - closing the PR will delete the forked app
 - re-opening the PR will re-create a fork
 
-We use it a lot at [Rainforest QA](https://www.rainforestqa.com/). If you want to see a sample Fourchette app, here is one for you to look at: https://github.com/rainforestapp/fourchette.
+We use it a lot at [Rainforest QA](https://www.rainforestqa.com/). If you want to see a sample Fourchette app, here is one for you to look at: https://github.com/rainforestapp/rf-ourchette.
 
 ## Installation
 
@@ -51,8 +51,8 @@ We use it a lot at [Rainforest QA](https://www.rainforestqa.com/). If you want t
 
 ### Configuration
 
-- `export FOURCHETTE_GITHUB_PROJECT="jipiboily/fourchette"`
-- `export FOURCHETTE_GITHUB_USERNAME="jipiboily"`
+- `export FOURCHETTE_GITHUB_PROJECT="rainforestapp/fourchette"`
+- `export FOURCHETTE_GITHUB_USERNAME="rainforestapp"`
 - `export FOURCHETTE_GITHUB_PERSONAL_TOKEN='a token here...'` # You can create one here: https://github.com/settings/applications
 - `export FOURCHETTE_HEROKU_API_KEY='API key here'`
 - `export FOURCHETTE_HEROKU_APP_TO_FORK='the name of the app to fork from'`
