@@ -112,6 +112,6 @@ If you want the maximum output in your GitHub comments, set this environment var
 export DEBUG='true'
 ```
 
-# Contributors
+# Thanks to...
 
-Thanks to [@jpsirois](https://github.com/jpsirois/) for the logo!
+- [@jpsirois](https://github.com/jpsirois/) for the logo!
