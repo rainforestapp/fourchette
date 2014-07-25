@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jean-Philippe Boily"]
   spec.email         = ["j@jipi.ca"]
   spec.summary       = %q{Your new best friend for isolated testing environments on Heroku.}
-  spec.description   = %q{Fourchette is your new best friend for having isolated testing environements. It will help you test your GitHub PRs against a fork of one your Heroku apps. You will have one Heroku app per PR now. Isn't that amazing? It will make testing way easier and you won't have the (maybe) broken code from other PRs on staging but only the code that requires testing.}
+  spec.description   = %q{Fourchette is your new best friend for having isolated testing environment. It will help you test your GitHub PRs against a fork of one your Heroku apps. You will have one Heroku app per PR now. Isn't that amazing? It will make testing way easier and you won't have the (maybe) broken code from other PRs on staging but only the code that requires testing.}
   spec.homepage      = "https://github.com/jipiboily/fourchette"
   spec.license       = "MIT"
 
@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "sinatra-contrib"
   spec.add_dependency "octokit"
   spec.add_dependency "git"
-  spec.add_dependency "heroku", "~> 3.9" # Deprecated, but best/easiest solution for the pgbackups...
+  spec.add_dependency "heroku", "~> 3.9" # Deprecated, but best/easiest solution for pgbackups...
   spec.add_dependency 'platform-api', '~> 0.2.0'
   spec.add_dependency "sucker_punch"
   spec.add_dependency "thor"
