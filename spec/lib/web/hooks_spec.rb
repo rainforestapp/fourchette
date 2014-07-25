@@ -11,7 +11,7 @@ describe "GitHub web hooks receiver" do
       .with(expected_param)
 
     post "/hooks",
-      expected_param.to_json,
-      "CONTENT_TYPE" => "application/json"
+         expected_param.to_json,
+         "CONTENT_TYPE" => "application/json"
   end
 end
