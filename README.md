@@ -13,6 +13,8 @@
 
 Fourchette is your new best friend for having isolated testing environments. It will help you test your @GitHub PRs against a fork of one your @Heroku apps. You will have one Heroku app per PR now. Isn't that amazing? It will make testing way easier and you won't have the (maybe) broken code from other PRs on staging but only the code that requires testing.
 
+Fourchette is maintained by @jipiboily! You can see the other [contributors here](https://github.com/rainforestapp/fourchette/graphs/contributors).
+
 **IMPORTANT: Please note that forking your Heroku app means it will copy the same addon plans and that you will pay for multiple apps and their addons. Watch out!**
 
 ## Table of content
