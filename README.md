@@ -9,6 +9,7 @@
   <a href="https://travis-ci.org/rainforestapp/fourchette"><img src="http://img.shields.io/travis/rainforestapp/fourchette/master.svg?style=flat" /></a>
   <a href='https://coveralls.io/r/rainforestapp/fourchette'><img src='http://img.shields.io/coveralls/rainforestapp/fourchette.svg?style=flat' alt='Coverage Status' /></a>
   <a href="http://badge.fury.io/rb/fourchette"><img src="http://img.shields.io/gem/v/fourchette.svg?style=flat" alt="Gem Version" height="18"></a>
+  <a href="http://tip4commit.com/github/rainforestapp/fourchette"><img src="http://tip4commit.com/projects/874.svg"><a>
 </p>
 
 Fourchette is your new best friend for having isolated testing environments. It will help you test your @GitHub PRs against a fork of one your @Heroku apps. You will have one Heroku app per PR now. Isn't that amazing? It will make testing way easier and you won't have the (maybe) broken code from other PRs on staging but only the code that requires testing.
