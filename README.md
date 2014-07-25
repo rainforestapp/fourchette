@@ -11,7 +11,7 @@
   <a href="http://badge.fury.io/rb/fourchette"><img src="http://img.shields.io/gem/v/fourchette.svg?style=flat" alt="Gem Version" height="18"></a>
 </p>
 
-Fourchette is your new best friend for having isolated testing environements. It will help you test your GitHub PRs against a fork of one your Heroku apps. You will have one Heroku app per PR now. Isn't that amazing? It will make testing way easier and you won't have the (maybe) broken code from other PRs on staging but only the code that requires testing.
+Fourchette is your new best friend for having isolated testing environments. It will help you test your @GitHub PRs against a fork of one your @Heroku apps. You will have one Heroku app per PR now. Isn't that amazing? It will make testing way easier and you won't have the (maybe) broken code from other PRs on staging but only the code that requires testing.
 
 **IMPORTANT: Please note that forking your Heroku app means it will copy the same addon plans and that you will pay for multiple apps and their addons. Watch out!**
 
@@ -21,7 +21,7 @@ Fourchette is your new best friend for having isolated testing environements. It
   * [Configuration](#configuration)
   * [Enable your Fourchette instance](#enable-your-fourchette-instance)
   * [Enable, disable, update or delete the hook](#enable-disable-update-or-delete-the-hook)
-  * [Before & after steps, aka, callbacks](#before--after-steps-aka-callbacks)
+  * [Before & after steps; aka callbacks](#before--after-steps-aka-callbacks)
 - [Rake tasks](#rake-tasks)
 - [Async processing note](#async-processing-note)
 - [Contribute](#contribute)
@@ -30,12 +30,12 @@ Fourchette is your new best friend for having isolated testing environements. It
 
 ## How does that work exactly?
 
-- a PR is created against your GitHub project
-- Fourchette receives an event via GitHub Hooks
-  - it [forks](https://devcenter.heroku.com/articles/fork-app) an environement making it available to you
-  - any new commit against that PR will update the code
-- closing the PR will delete the forked app
-- re-opening the PR will re-create a fork
+1. A PR is created against your GitHub project
+- Fourchette then receives an event via GitHub Hooks:
+  - It [forks](https://devcenter.heroku.com/articles/fork-app) an environment making it available to you
+  - Any new commit against that PR will update the code
+- Closing the PR will delete the forked app
+- Re-opening the PR will re-create a fork
 
 We use it a lot at [Rainforest QA](https://www.rainforestqa.com/). If you want to see a sample Fourchette app, here is one for you to look at: https://github.com/rainforestapp/rf-ourchette.
 
@@ -46,7 +46,7 @@ We use it a lot at [Rainforest QA](https://www.rainforestqa.com/). If you want t
 3. run `cd my-app-name` (replace app name, again)
 4. run `git init && git add . && git commit -m "Initial commit :tada:"`
 5. push to Heroku
-6. configure the right environement variables (see [#configuration](#configuration))
+6. configure the right environment variables (see [#configuration](#configuration))
 7. Enable your Fourchette instance
 
 ### Configuration
@@ -54,7 +54,7 @@ We use it a lot at [Rainforest QA](https://www.rainforestqa.com/). If you want t
 - `export FOURCHETTE_GITHUB_PROJECT="rainforestapp/fourchette"`
 - `export FOURCHETTE_GITHUB_USERNAME="rainforestapp"`
 - `export FOURCHETTE_GITHUB_PERSONAL_TOKEN='a token here...'` # You can create one here: https://github.com/settings/applications
-- `export FOURCHETTE_HEROKU_API_KEY='API key here'`
+- `export FOURCHETTE_HEROKU_API_KEY="API key here"`
 - `export FOURCHETTE_HEROKU_APP_TO_FORK='the name of the app to fork from'`
 - `export FOURCHETTE_APP_URL="http://fourchette-app.herokuapp.com"`
 - `export FOURCHETTE_HEROKU_APP_PREFIX="fourchette"` # This is basically to namespace your forks. In that example, they would be named "fourchette-pr-1234" where "1234" is the PR number. Beware, the name can't be more than 30 characters total! It will be changed to be lowercase only, so you should probably just use lowercase characters anyways.
@@ -67,11 +67,11 @@ run `bundle exec rake fourchette:enable`
 
 ### Enable, disable, update or delete the hook
 
-`bundle exec rake -T` will tell you the rake tasks available. There are tasks to enable, disable or delete the GitHub hook to your Fourchette instance. There is also one to update the hook. That last one is mostly for development, if your local tunnel URl changed and you want to update the hook's URL.
+`bundle exec rake -T` will tell you the rake tasks available. There are tasks to enable, disable or delete the GitHub hook to your Fourchette instance. There is also one to update the hook. That last one is mostly for development, if your local tunnel URL changed and you want to update the hook's URL.
 
 ### Before & after steps, aka, callbacks
 
-You need to run steps before and/or after the creation of your new Heroku app? Let's say you want to run mirgations after deploying new code. There is a simple (and primitive) way of doing it. It might not be perfect but can work until there is a cleaner and more flexible way of doing so, if required.
+You need to run steps before and/or after the creation of your new Heroku app? Let's say you want to run mirgations after deploying new code. There is a simple (and primitive) way of doing it. It might not be perfect but will work until there is a cleaner and more flexible way of doing so, if required.
 
 Create a file in your project to override the `Fourchette::Callbacks` class and include it after Fourchette.
 
@@ -79,7 +79,7 @@ You just want to override the `before` or `after` methods of `Fourchette::Callba
 
 ## Rake tasks
 
-```
+```bash
 rake fourchette:console  # Brings up a REPL with the code loaded
 rake fourchette:delete   # This deletes the Fourchette hook
 rake fourchette:disable  # This disables Fourchette hook
@@ -93,7 +93,7 @@ Adding `[qa skip]` to the title of your pull request will cause Fourchette to ig
 
 ## Async processing note
 
-Fourchette uses [Sucker Punch](https://github.com/brandonhilkert/sucker_punch), "a single-process Ruby asynchronous processing library". No need for redis or extra processes. It also mean it can run for free on Heroku, if this is what you want.
+Fourchette uses [Sucker Punch](https://github.com/brandonhilkert/sucker_punch), "a single-process Ruby asynchronous processing library". No need for redis or extra processes. It also mean you can run it for free on Heroku, if this is what you want.
 
 ## Contribute
 
