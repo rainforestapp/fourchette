@@ -1,4 +1,4 @@
-require 'rack/test'
+require "rack/test"
 include Rack::Test::Methods
 
 def app
