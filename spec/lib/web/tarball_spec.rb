@@ -1,13 +1,7 @@
 require 'spec_helper'
-require 'rack/test'
+require 'support/sinatra_helper'
 
 describe 'web tarball serving' do
-  include Rack::Test::Methods
-
-  def app
-    Sinatra::Application
-  end
-
   context 'valid and not expired URL' do
     it "returns the file" do
       expire_in_2_secs = Time.now.to_i + 2
@@ -15,7 +9,7 @@ describe 'web tarball serving' do
         .should_receive(:filepath)
         .with('1234567', expire_in_2_secs.to_s)
         .and_return { "#{Dir.pwd}/spec/factories/fake_file" }
-      
+
       get "/jipiboily/fourchette/1234567/#{expire_in_2_secs}"
       expect(last_response.headers['Content-Type']).to eq "application/x-tgz"
       expect(last_response.body).to eq 'some content...'
