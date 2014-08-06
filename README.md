@@ -98,6 +98,10 @@ Adding `[qa skip]` to the title of your pull request will cause Fourchette to ig
 
 Fourchette uses [Sucker Punch](https://github.com/brandonhilkert/sucker_punch), "a single-process Ruby asynchronous processing library". No need for redis or extra processes. It also mean you can run it for free on Heroku, if this is what you want.
 
+## License
+
+See [here](LICENSE.txt)
+
 ## Contribute
 
 - fork & clone
