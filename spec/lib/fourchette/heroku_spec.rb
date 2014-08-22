@@ -73,7 +73,13 @@ describe Fourchette::Heroku do
   end
 
   describe '#copy_config' do
-    let(:vars) { { 'WHATEVER' => 'ok', 'HEROKU_POSTGRESQL_SOMETHING_URL' => 'FAIL@POSTGRES/DB' } }
+    let(:vars) do
+      {
+        'WHATEVER' => 'ok',
+        'HEROKU_POSTGRESQL_SOMETHING_URL' => 'FAIL@POSTGRES/DB',
+        'DATABASE_URL' => 'FAIL@POSTGRES/DB'
+      }
+    end
     let(:cleaned_vars) { { 'WHATEVER' => 'ok'} }
 
     it 'calls #config_vars' do

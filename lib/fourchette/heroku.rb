@@ -42,8 +42,9 @@ class Fourchette::Heroku
   def copy_config from, to
     logger.info "Copying configs from #{from} to #{to}"
     from_congig_vars = config_vars(from)
-    # WE SHOULD NOT MOVE THE HEROKU_POSTGRES_*_URL...
+    # WE SHOULD NOT MOVE THE HEROKU_POSTGRES_*_URL or DATABASE_URL...
     from_congig_vars.reject! { |k, v| k.start_with?('HEROKU_POSTGRESQL_') && k.end_with?('_URL') }
+    from_congig_vars.reject! { |k, v| k == ('DATABASE_URL') }
     client.config_var.update(to, from_congig_vars)
   end
 
