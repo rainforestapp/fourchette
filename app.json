@@ -25,10 +25,10 @@
       "description": "Your Heroku API key"
     },
     "FOURCHETTE_HEROKU_APP_TO_FORK": {
-      "description": "The name of the source app for forking",
+      "description": "The name of the source app for forking"
     },
     "FOURCHETTE_APP_URL": {
-      "description": "Disable InfluxDB TLS verification",
+      "description": "Disable InfluxDB TLS verification"
     },
     "FOURCHETTE_HEROKU_APP_PREFIX": {
       "description": "A custom prefix for your forks, use it to namespace your forks. By default they'll be named 'fourchette-pr-1234' where '1234' is the PR number. Beware, the name can't be more than 30 characters total! It will be changed to be lowercase only, so you should probably just use lowercase characters anyways.",
