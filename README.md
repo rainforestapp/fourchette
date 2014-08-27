@@ -18,7 +18,7 @@ Fourchette is maintained by [@jipiboily](https://github.com/jipiboily/)! You can
 
 **IMPORTANT: Please note that forking your Heroku app means it will copy the same addon plans and that you will pay for multiple apps and their addons. Watch out!**
 
-## Table of content
+## Table of contents
 1. [How does that work exactly?](#how-does-that-work-exactly)
 - [Installation](#installation)
   * [Configuration](#configuration)
@@ -44,6 +44,16 @@ We use it a lot at [Rainforest QA](https://www.rainforestqa.com/). If you want t
 
 ## Installation
 
+There are two options to installation;
+
+### 1a - Deploy direct to Heroku
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+### 1b - Manual
+
+#### Install locally and setup the app
+
 1. run `gem install fourchette`
 2. run `fourchette new my-app-name`. You can replace "my-app-name" by whatever you want it, this is the name of the directory your Fourchette app will be created in.
 3. run `cd my-app-name` (replace app name, again)
@@ -52,7 +62,7 @@ We use it a lot at [Rainforest QA](https://www.rainforestqa.com/). If you want t
 6. configure the right environment variables (see [#configuration](#configuration))
 7. Enable your Fourchette instance
 
-### Configuration
+#### Configure the new app
 
 - `export FOURCHETTE_GITHUB_PROJECT="rainforestapp/fourchette"`
 - `export FOURCHETTE_GITHUB_USERNAME="rainforestapp"`
@@ -64,9 +74,12 @@ We use it a lot at [Rainforest QA](https://www.rainforestqa.com/). If you want t
 
 **IMPORTANT**: the GitHub user needs to be an admin of the repo to be able to add, enable or disable the web hook used by Fourchette. You could create it by hand if you prefer.
 
-### Enable your Fourchette instance
+### 2 - Enable your Fourchette instance
 
 run `bundle exec rake fourchette:enable`
+
+
+## Managing Fourchette
 
 ### Enable, disable, update or delete the hook
 
@@ -80,7 +93,7 @@ Create a file in your project to override the `Fourchette::Callbacks` class and 
 
 You just want to override the `before` or `after` methods of `Fourchette::Callbacks` (`lib/fourchette/callbacks.rb`) to suit your needs. In those methods, you have access to GitHub's hook data via the `@param` instance variable.
 
-## Rake tasks
+### Rake tasks
 
 ```bash
 rake fourchette:console  # Brings up a REPL with the code loaded
@@ -90,7 +103,7 @@ rake fourchette:enable   # This enables Fourchette hook
 rake fourchette:update   # This updates the Fourchette hook with the current URL of the app
 ```
 
-## QA Skip
+### QA Skip
 
 Adding `[qa skip]` to the title of your pull request will cause Fourchette to ignore the pull request. This is inspired by the `[ci skip]` directive that [various](http://docs.travis-ci.com/user/how-to-skip-a-build/) [ci tools](https://circleci.com/docs/skip-a-build) support.
 
@@ -111,7 +124,7 @@ See [here](LICENSE.txt)
 
 Bonus: if you need a tunnel to your local dev machine to work with GitHub hooks, you might want to look at https://ngrok.com/.
 
-### Logging
+## Logging
 
 If you want the maximum output in your GitHub comments, set this environment variable:
 
@@ -119,6 +132,6 @@ If you want the maximum output in your GitHub comments, set this environment var
 export DEBUG='true'
 ```
 
-# Thanks to...
+## Thanks to...
 
 - [@jpsirois](https://github.com/jpsirois/) for the logo!

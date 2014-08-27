@@ -1,0 +1,43 @@
+{
+  "name": "Fourchette",
+  "description": "Fourchette enables a better development workflow for teams, leveraging forking and github pull requests together to give you isolated environments automatically to checkout new features in your app with ease!",
+  "website": "https://github.com/rainforestapp/fourchette",
+  "repository": "https://github.com/rainforestapp/fourchette",
+  "keywords": [
+    "heroku",
+    "forking",
+    "github",
+    "productivity",
+    "workflow"
+  ],
+  "success_url": "https://github.com/rainforestapp/fourchette",
+  "env": {
+    "FOURCHETTE_GITHUB_PROJECT": {
+      "description": "The github project to watch for notifications from"
+    },
+    "FOURCHETTE_GITHUB_USERNAME": {
+      "description": "The github username for the project. Note this user needs to be an admin of the repo to be able to add, enable or disable the web hook used by Fourchette. You could create it by hand if you prefer."
+    },
+    "FOURCHETTE_GITHUB_PERSONAL_TOKEN": {
+      "description": "A personal token for Fourchette to comment on the PR's with URLs to your fork. Get one here https://github.com/settings/applications."
+    },
+    "FOURCHETTE_HEROKU_API_KEY": {
+      "description": "Your Heroku API key"
+    },
+    "FOURCHETTE_HEROKU_APP_TO_FORK": {
+      "description": "The name of the source app for forking",
+    },
+    "FOURCHETTE_APP_URL": {
+      "description": "Disable InfluxDB TLS verification",
+    },
+    "FOURCHETTE_HEROKU_APP_PREFIX": {
+      "description": "A custom prefix for your forks, use it to namespace your forks. By default they'll be named 'fourchette-pr-1234' where '1234' is the PR number. Beware, the name can't be more than 30 characters total! It will be changed to be lowercase only, so you should probably just use lowercase characters anyways.",
+      "value": "fourchette"
+    }
+  },
+  "addons": [
+    "logentries:tryit",
+    "newrelic:stark",
+    "sentry:developer"
+  ]
+}
