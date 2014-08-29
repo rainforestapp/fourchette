@@ -5,18 +5,19 @@ require 'platform-api'
 require 'octokit'
 require 'git'
 require 'sucker_punch'
+require 'rest-client'
 
 # TODO: Extract this to development.rb and production.rb
 if development?
   require "sinatra/reloader"
-  
+
   begin
     require "pry"
   rescue LoadError => ex
     # That's ok, we don't care...it was probably loaded from another project
     # and not to hack on Fourchette anyways!
   end
-  
+
   FOURCHETTE_CONFIG = {
     env_name: 'fourchette-dev'
   }
