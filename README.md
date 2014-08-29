@@ -44,6 +44,14 @@ We use it a lot at [Rainforest QA](https://www.rainforestqa.com/). If you want t
 
 ## Installation
 
+You have two choices here, the easy path, or the manual path.
+
+**Easy**: [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https%3A%2F%2Fgithub.com%2Frainforestapp%2Ffourchette-app)
+
+**Manual**
+
+This will give you more flexibility to create before and after actions, though you could also do it with the easy path and cloning your repo, etc.
+
 1. run `gem install fourchette`
 2. run `fourchette new my-app-name`. You can replace "my-app-name" by whatever you want it, this is the name of the directory your Fourchette app will be created in.
 3. run `cd my-app-name` (replace app name, again)
