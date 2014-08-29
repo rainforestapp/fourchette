@@ -46,7 +46,9 @@ We use it a lot at [Rainforest QA](https://www.rainforestqa.com/). If you want t
 
 You have two choices here, the easy path, or the manual path.
 
-**Easy**: [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https%3A%2F%2Fgithub.com%2Frainforestapp%2Ffourchette-app)
+**Easy**
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https%3A%2F%2Fgithub.com%2Frainforestapp%2Ffourchette-app)
 
 **Manual**
 
