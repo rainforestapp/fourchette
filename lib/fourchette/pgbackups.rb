@@ -1,4 +1,3 @@
-require "heroku/client/pgbackups"
 class Fourchette::Pgbackups
   include Fourchette::Logger
 
@@ -10,11 +9,38 @@ class Fourchette::Pgbackups
     ensure_pgbackups_is_present(from)
     ensure_pgbackups_is_present(to)
 
-    from_url, from_name = pg_details_for(from)
-    to_url, to_name = pg_details_for(to)
+    create_transfer(from, to)
+  end
 
-    @client =  Heroku::Client::Pgbackups.new pgbackup_url(from)+'/api'
-    @client.create_transfer(from_url, from_name, to_url, to_name)
+  def create_transfer(from, to)
+
+    pg_addons = @heroku.client.addon.list(from).select { |a| a['addon_service']['name'] == 'Heroku Postgres' }
+    if pg_addons.size == 1
+      pg_addon = pg_addons.first
+      from_url, from_name = pg_details_for(from)
+      to_url, to_name = pg_details_for(to)
+      resource_name = pg_addon['provider_id']
+
+      api_path = "/client/v11/databases/#{resource_name}/transfers"
+      api_parameters = parameters = {
+        'from_name' => from_name,
+        'from_url' => from_url,
+        'to_name' => to_name,
+        'to_url' => to_url
+      }.to_json
+
+      db_api_client = RestClient::Resource.new(
+        "https://postgres-api.heroku.com",
+        :user => ENV['FOURCHETTE_HEROKU_USERNAME'],
+        :password => ENV['FOURCHETTE_HEROKU_API_KEY']
+      )
+
+      res = db_api_client[api_path].post(parameters)
+      logger.info "Transfer initiated. uuid => #{res['uuid']}"
+    else
+      logger.info "There is no Postgres database to copy"
+    end
+
   end
 
   private
@@ -28,12 +54,6 @@ class Fourchette::Pgbackups
   def pg_details_for app_name
     @heroku.config_vars(app_name).each do |key, value|
       return [value, key] if key.start_with?('HEROKU_POSTGRESQL_') && key.end_with?('_URL')
-    end
-  end
-
-  def pgbackup_url app_name
-    @heroku.config_vars(app_name).each do |k, v|
-      return v if k == 'PGBACKUPS_URL'
     end
   end
 end
