@@ -36,7 +36,7 @@ class Fourchette::Pgbackups
       )
 
       res = db_api_client[api_path].post(parameters)
-      logger.info "Transfer initiated. uuid => #{res['uuid']}"
+      logger.info "Transfer initiated. API response => #{res}"
     else
       logger.info "There is no Postgres database to copy"
     end
