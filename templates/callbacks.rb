@@ -3,7 +3,7 @@
 class Fourchette::Callbacks
   include Fourchette::Logger
 
-  def initialize params
+  def initialize(params)
     @params = params
   end
 
