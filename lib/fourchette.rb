@@ -1,4 +1,4 @@
-require "fourchette/version"
+require 'fourchette/version'
 require 'sinatra'
 require 'json'
 require 'platform-api'
@@ -7,16 +7,16 @@ require 'git'
 require 'sucker_punch'
 require 'rest-client'
 
+def attempt_pry
+  require 'pry'
+rescue LoadError => ex
+  puts "Oops: #{ex}"
+end
+
 # TODO: Extract this to development.rb and production.rb
 if development?
-  require "sinatra/reloader"
-
-  begin
-    require "pry"
-  rescue LoadError => ex
-    # That's ok, we don't care...it was probably loaded from another project
-    # and not to hack on Fourchette anyways!
-  end
+  require 'sinatra/reloader'
+  attempt_pry
 
   FOURCHETTE_CONFIG = {
     env_name: 'fourchette-dev'
@@ -26,7 +26,6 @@ else
     env_name: 'fourchette'
   }
 end
-
 
 module Fourchette
   DEBUG = ENV['DEBUG'] ? true : false

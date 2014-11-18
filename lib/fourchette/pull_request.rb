@@ -1,7 +1,7 @@
 class Fourchette::PullRequest
   include SuckerPunch::Job
 
-  def perform params
+  def perform(params)
     return if qa_skip?(params)
 
     callbacks = Fourchette::Callbacks.new(params)
@@ -25,8 +25,8 @@ class Fourchette::PullRequest
 
   private
 
-  def qa_skip? params
-    params['pull_request']['title'].downcase.include?('[qa skip]')
+  def qa_skip?(params)
+    pr_title = params['pull_request']['title']
+    pr_title.downcase.include?('[qa skip]')
   end
-
 end
