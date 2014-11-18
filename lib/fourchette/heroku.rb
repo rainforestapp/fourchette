@@ -56,7 +56,7 @@ class Fourchette::Heroku
       begin
         logger.info "Adding #{name} to #{to}"
         client.addon.create(to, { plan: name })
-      rescue Excon::Errors::UnprocessableEntity => e
+      rescue Excon::Errors::UnprocessableEntity, Excon::Errors::ServiceUnavailable => e
         logger.error "Failed to copy addon #{name}"
         logger.error e
       end
