@@ -1,4 +1,4 @@
 Logger.class_eval do
-  def info(*args)
+  def info(*_args)
   end
 end

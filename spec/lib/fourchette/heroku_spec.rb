@@ -19,7 +19,9 @@ describe Fourchette::Heroku do
     config_var = double('config_var')
     client.stub(:config_var).and_return(config_var)
 
-    client.app.stub(:info).and_return( { 'git_url' => 'git@heroku.com/something.git' } )
+    client.app.stub(:info).and_return(
+      'git_url' => 'git@heroku.com/something.git'
+    )
 
     heroku.stub(:client).and_return(client)
   end
@@ -39,7 +41,9 @@ describe Fourchette::Heroku do
       heroku.stub(:copy_RACK_AND_RAILS_ENV_again)
     end
 
-    ['create_app', 'copy_config', 'copy_add_ons', 'copy_pg', 'copy_RACK_AND_RAILS_ENV_again'].each do |method_name|
+    %w(
+      create_app copy_config copy_add_ons copy_pg copy_RACK_AND_RAILS_ENV_again
+    ).each do |method_name|
       it "calls `#{method_name}'" do
         heroku.should_receive(method_name)
         heroku.fork(from_app_name, to_app_name)
@@ -48,7 +52,9 @@ describe Fourchette::Heroku do
   end
 
   describe '#git_url' do
-    it { expect(heroku.git_url(to_app_name)).to eq 'git@heroku.com/something.git' }
+    it 'returns the correct git URL' do
+      expect(heroku.git_url(to_app_name)).to eq 'git@heroku.com/something.git'
+    end
   end
 
   describe '#delete' do
@@ -67,7 +73,7 @@ describe Fourchette::Heroku do
 
   describe '#create_app' do
     it 'calls app.create on the Heroku client' do
-      heroku.client.app.should_receive(:create).with({ name: to_app_name })
+      heroku.client.app.should_receive(:create).with(name: to_app_name)
       heroku.create_app(to_app_name)
     end
   end
@@ -80,7 +86,7 @@ describe Fourchette::Heroku do
         'DATABASE_URL' => 'FAIL@POSTGRES/DB'
       }
     end
-    let(:cleaned_vars) { { 'WHATEVER' => 'ok'} }
+    let(:cleaned_vars) { { 'WHATEVER' => 'ok' } }
 
     it 'calls #config_vars' do
       heroku.client.config_var.stub(:update)
@@ -89,14 +95,15 @@ describe Fourchette::Heroku do
     end
 
     it 'updates config vars without postgres URLs' do
-      heroku.client.config_var.should_receive(:update).with(to_app_name, cleaned_vars )
+      heroku.client.config_var.should_receive(:update)
+        .with(to_app_name, cleaned_vars)
       heroku.stub(:config_vars).and_return(vars)
       heroku.copy_config('from', to_app_name)
     end
   end
 
   describe '#copy_add_ons' do
-    let(:addon_list) { [ { 'plan' => { 'name' => 'redistogo' } } ] }
+    let(:addon_list) { [{ 'plan' => { 'name' => 'redistogo' } }] }
 
     before do
       heroku.client.stub(:addon).and_return(double('addon'))
@@ -105,12 +112,15 @@ describe Fourchette::Heroku do
     end
 
     it 'gets the addon list' do
-      heroku.client.addon.should_receive(:list).with(from_app_name).and_return(addon_list)
+      heroku.client.addon.should_receive(:list).with(from_app_name)
+        .and_return(addon_list)
       heroku.copy_add_ons(from_app_name, to_app_name)
     end
 
     it 'creates addons' do
-      heroku.client.addon.should_receive(:create).with(to_app_name, { plan: 'redistogo' })
+      heroku.client.addon.should_receive(:create).with(
+        to_app_name,  plan: 'redistogo'
+      )
       heroku.copy_add_ons(from_app_name, to_app_name)
     end
   end
@@ -123,10 +133,14 @@ describe Fourchette::Heroku do
     end
 
     context 'when a heroku-postgresql addon is enabled' do
-      let(:addon_list) { [{ 'addon_service' => { 'name' => 'Heroku Postgres' } }] }
+      let(:addon_list) do
+        [{ 'addon_service' => { 'name' => 'Heroku Postgres' } }]
+      end
 
       it 'calls Fourchette::Pgbackups#copy' do
-        Fourchette::Pgbackups.any_instance.should_receive(:copy).with(from_app_name, to_app_name)
+        Fourchette::Pgbackups.any_instance.should_receive(:copy).with(
+          from_app_name, to_app_name
+        )
         heroku.copy_pg(from_app_name, to_app_name)
       end
     end
@@ -135,12 +149,14 @@ describe Fourchette::Heroku do
       let(:addon_list) { [{ 'addon_service' => { 'name' => 'redistogo' } }] }
 
       it 'does not call Fourchette::Pgbackups#copy' do
-        # Had to work around lack of support for any_instance and should_not_receive
-        # see https://github.com/rspec/rspec-mocks/issues/164 for more details
+        # Had to work around lack of support for any_instance and
+        # should_not_receive
+        # See https://github.com/rspec/rspec-mocks/issues/164 for more details
         count = 0
-        Fourchette::Pgbackups.any_instance.stub(:copy) do |from_app_name, to_app_name|
-          count += 1
-        end
+        Fourchette::Pgbackups
+          .any_instance.stub(:copy) do |_from_app_name, _to_app_name|
+            count += 1
+          end
         heroku.copy_pg(from_app_name, to_app_name)
         count.should eq(0)
       end
@@ -150,11 +166,13 @@ describe Fourchette::Heroku do
   describe '#copy_RACK_AND_RAILS_ENV_again' do
     context 'with RACK_ENV or RAILS_ENV setup' do
       before do
-        heroku.stub(:get_original_env).and_return({ 'RACK_ENV' => 'qa' })
+        heroku.stub(:get_original_env).and_return('RACK_ENV' => 'qa')
       end
 
       it 'updates the config vars' do
-        heroku.client.config_var.should_receive(:update).with(to_app_name,  { 'RACK_ENV' => 'qa' })
+        heroku.client.config_var.should_receive(:update).with(
+          to_app_name, 'RACK_ENV' => 'qa'
+        )
         heroku.copy_RACK_AND_RAILS_ENV_again(from_app_name, to_app_name)
       end
     end
@@ -173,13 +191,17 @@ describe Fourchette::Heroku do
 
   describe '#get_original_env' do
     before do
-      stub_cong_var = { 'RACK_ENV' => 'qa', 'RAILS_ENV' => 'staging', 'DATABASE_URL' => 'postgres://....' }
+      stub_cong_var = {
+        'RACK_ENV' => 'qa',
+        'RAILS_ENV' => 'staging',
+        'DATABASE_URL' => 'postgres://....'
+      }
       heroku.stub_chain(:client, :config_var, :info).and_return(stub_cong_var)
     end
 
     it 'returns the set env vars' do
       return_value = heroku.get_original_env(from_app_name)
-      expect(return_value).to eq({'RACK_ENV' => 'qa', 'RAILS_ENV' => 'staging'})
+      expect(return_value).to eq('RACK_ENV' => 'qa', 'RAILS_ENV' => 'staging')
     end
   end
 end
