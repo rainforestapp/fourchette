@@ -29,14 +29,25 @@ class Fourchette::GitHub
     octokit.remove_hook(ENV['FOURCHETTE_GITHUB_PROJECT'], fourchette_hook.id)
   end
 
-  def comment_pr pr_number, comment
-    comment = "****** FOURCHETTE COMMENT ******\n\n#{comment}\n\n****** END OF FOURCHETTE COMMENT ******" if Fourchette::DEBUG
+  def comment_pr(pr_number, comment)
+    if Fourchette::DEBUG
+      comment = <<-TXT
+        ****** FOURCHETTE COMMENT ******\n
+        \n#{comment}\n\n
+        ****** END OF FOURCHETTE COMMENT ******
+      TXT
+    end
+
     octokit.add_comment(ENV['FOURCHETTE_GITHUB_PROJECT'], pr_number, comment)
   end
 
   private
+
   def octokit
-    @octokit_client ||= Octokit::Client.new(login: ENV['FOURCHETTE_GITHUB_USERNAME'], password: ENV['FOURCHETTE_GITHUB_PERSONAL_TOKEN'])
+    @octokit_client ||= Octokit::Client.new(
+      login: ENV['FOURCHETTE_GITHUB_USERNAME'],
+      password: ENV['FOURCHETTE_GITHUB_PERSONAL_TOKEN']
+    )
   end
 
   def create_hook
@@ -44,16 +55,18 @@ class Fourchette::GitHub
     octokit.create_hook(
       ENV['FOURCHETTE_GITHUB_PROJECT'],
       'web',
-      {
-        url: "#{ENV['FOURCHETTE_APP_URL']}/hooks",
-        content_type: 'json',
-        fourchette_env: FOURCHETTE_CONFIG[:env_name]
-      },
-      {
-        :events => ['pull_request'],
-        :active => true
-      }
+      hook_options,
+      events: ['pull_request'],
+      active: true
     )
+  end
+
+  def hook_options
+    {
+      url: "#{ENV['FOURCHETTE_APP_URL']}/hooks",
+      content_type: 'json',
+      fourchette_env: FOURCHETTE_CONFIG[:env_name]
+    }
   end
 
   def hooks
@@ -82,20 +95,14 @@ class Fourchette::GitHub
     toggle_active_state_to hook, false
   end
 
-  def toggle_active_state_to hook, active_value
+  def toggle_active_state_to(hook, active_value)
     octokit.edit_hook(
       ENV['FOURCHETTE_GITHUB_PROJECT'],
       hook.id,
       'web',
-      {
-        url: "#{ENV['FOURCHETTE_APP_URL']}/hooks",
-        content_type: 'json',
-        fourchette_env: FOURCHETTE_CONFIG[:env_name]
-      },
-      {
-        :events => ['pull_request'],
-        :active => active_value
-      }
+      hook_options,
+      events: ['pull_request'],
+      active: active_value
     )
   end
 end

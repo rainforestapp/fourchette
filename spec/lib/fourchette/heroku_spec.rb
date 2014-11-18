@@ -38,11 +38,11 @@ describe Fourchette::Heroku do
       heroku.stub(:copy_config)
       heroku.stub(:copy_add_ons)
       heroku.stub(:copy_pg)
-      heroku.stub(:copy_RACK_AND_RAILS_ENV_again)
+      heroku.stub(:copy_rack_and_rails_env_again)
     end
 
     %w(
-      create_app copy_config copy_add_ons copy_pg copy_RACK_AND_RAILS_ENV_again
+      create_app copy_config copy_add_ons copy_pg copy_rack_and_rails_env_again
     ).each do |method_name|
       it "calls `#{method_name}'" do
         heroku.should_receive(method_name)
@@ -163,7 +163,7 @@ describe Fourchette::Heroku do
     end
   end
 
-  describe '#copy_RACK_AND_RAILS_ENV_again' do
+  describe '#copy_rack_and_rails_env_again' do
     context 'with RACK_ENV or RAILS_ENV setup' do
       before do
         heroku.stub(:get_original_env).and_return('RACK_ENV' => 'qa')
@@ -173,7 +173,7 @@ describe Fourchette::Heroku do
         heroku.client.config_var.should_receive(:update).with(
           to_app_name, 'RACK_ENV' => 'qa'
         )
-        heroku.copy_RACK_AND_RAILS_ENV_again(from_app_name, to_app_name)
+        heroku.copy_rack_and_rails_env_again(from_app_name, to_app_name)
       end
     end
 
@@ -184,7 +184,7 @@ describe Fourchette::Heroku do
 
       it 'does not update config vars' do
         heroku.client.config_var.should_not_receive(:update)
-        heroku.copy_RACK_AND_RAILS_ENV_again(from_app_name, to_app_name)
+        heroku.copy_rack_and_rails_env_again(from_app_name, to_app_name)
       end
     end
   end
