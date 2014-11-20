@@ -63,7 +63,7 @@ class Fourchette::Fork
   private
 
   def app_exists?
-    @app_exists ||= @heroku.app_exists?(fork_name)
+    @heroku.app_exists?(fork_name)
   end
 
   def tarball_options
@@ -75,8 +75,10 @@ class Fourchette::Fork
   end
 
   def tarball_url
-    @tarball_url ||= Fourchette::Tarball.new.url(
-      github_git_url, git_branch_name, ENV['FOURCHETTE_GITHUB_PROJECT']
+    Fourchette::Tarball.new.url(
+      github_git_url,
+      git_branch_name,
+      ENV['FOURCHETTE_GITHUB_PROJECT']
     )
   end
 

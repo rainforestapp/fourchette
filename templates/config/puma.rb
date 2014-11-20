@@ -3,6 +3,6 @@ threads Integer(ENV['PUMA_MIN_THREADS']  || 1), Integer(ENV['PUMA_MAX_THREADS'] 
 
 preload_app!
 
-rackup DefaultRackup
-port ENV['PORT']     || 9292
+rackup      DefaultRackup
+port        ENV['PORT']     || 9292
 environment ENV['RACK_ENV'] || 'development'
