@@ -12,20 +12,21 @@ class Fourchette::Tarball
   end
 
   private
+
   def prepare_tarball(github_git_url, branch_name)
     clone_path = "tmp/#{SecureRandom.uuid}"
     clone(github_git_url, branch_name, clone_path)
     tar(clone_path)
   end
 
-  def clone(github_git_url,branch_name, clone_path)
-    logger.info "Cloning repository..."
+  def clone(github_git_url, branch_name, clone_path)
+    logger.info 'Cloning repository...'
     repo = Git.clone(github_git_url, clone_path, recursive: true)
     repo.checkout(branch_name)
   end
 
   def tar(path)
-    logger.info "Preparing tarball..."
+    logger.info 'Preparing tarball...'
     filepath = "#{path}/#{expiration_timestamp}.tar.gz"
     system("tar -zcf #{filepath} -C #{path} .")
     filepath
@@ -36,7 +37,7 @@ class Fourchette::Tarball
   end
 
   def tarball_to_url(filepath, github_repo)
-    logger.info "Tarball to URL as a service in progress..."
+    logger.info 'Tarball to URL as a service in progress...'
     cleaned_path = filepath.gsub('tmp/', '').gsub('.tar.gz', '')
     "#{ENV['FOURCHETTE_APP_URL']}/#{github_repo}/#{cleaned_path}"
   end

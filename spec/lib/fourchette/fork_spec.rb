@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Fourchette::Fork do
   subject { described_class.new(params) }
 
-  let(:params) {
+  let(:params) do
     {
       'pull_request' => {
         'number' => 1,
@@ -12,14 +12,15 @@ describe Fourchette::Fork do
         }
       }
     }
-  }
+  end
   let(:fork_name) { 'my-fork-pr-1' }
 
   before do
-    stub_const('ENV', {
-        'FOURCHETTE_HEROKU_APP_PREFIX' => 'my-fork',
-        'FOURCHETTE_HEROKU_APP_TO_FORK' => 'my-heroku-app-name'
-        })
+    stub_const(
+      'ENV',
+      'FOURCHETTE_HEROKU_APP_PREFIX' => 'my-fork',
+      'FOURCHETTE_HEROKU_APP_TO_FORK' => 'my-heroku-app-name'
+    )
   end
 
   describe '#create' do
@@ -42,13 +43,16 @@ describe Fourchette::Fork do
 
       it 'calls the fork creation' do
         subject.stub(:post_fork_url)
-        Fourchette::Heroku.any_instance.should_receive(:fork).with('my-heroku-app-name', fork_name)
+        Fourchette::Heroku.any_instance.should_receive(:fork)
+          .with('my-heroku-app-name', fork_name)
       end
 
       it 'post the URL to the fork on the GitHub PR' do
         Fourchette::Heroku.any_instance.stub(:fork)
-        Fourchette::Heroku.any_instance.stub_chain(:client, :app, :info).and_return({'web_url' => 'rainforestqa.com'})
-        Fourchette::GitHub.any_instance.should_receive(:comment_pr).with(1, 'Test URL: rainforestqa.com')
+        Fourchette::Heroku.any_instance.stub_chain(:client, :app, :info)
+          .and_return('web_url' => 'rainforestqa.com')
+        Fourchette::GitHub.any_instance.should_receive(:comment_pr)
+          .with(1, 'Test URL: rainforestqa.com')
       end
     end
 
@@ -73,7 +77,8 @@ describe Fourchette::Fork do
 
     it 'comments on the GitHub PR' do
       Fourchette::Heroku.any_instance.stub(:delete)
-      Fourchette::GitHub.any_instance.should_receive(:comment_pr).with(1, 'Test app deleted!')
+      Fourchette::GitHub.any_instance.should_receive(:comment_pr)
+        .with(1, 'Test app deleted!')
       subject.delete
     end
   end

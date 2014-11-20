@@ -1,9 +1,9 @@
-# This is a sample file to see how the really, really basic callback system works.
-# See the README for me or just dive in.
+# This is a sample file to see how the really, really basic callback system
+# works. See the README for me or just dive in.
 class Fourchette::Callbacks
   include Fourchette::Logger
 
-  def initialize params
+  def initialize(params)
     @params = params
   end
 
