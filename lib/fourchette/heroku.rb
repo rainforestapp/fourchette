@@ -73,7 +73,7 @@ class Fourchette::Heroku
     if pg_enabled?(from)
       logger.info "Copying Postgres's data from #{from} to #{to}"
       backup = Fourchette::Pgbackups.new
-      logger.info backup.copy(from, to)
+      backup.copy(from, to)
     else
       logger.info "Postgres not enabled on #{from}. Skipping data copy."
     end
