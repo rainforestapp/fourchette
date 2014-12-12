@@ -25,8 +25,8 @@ describe Fourchette::Fork do
 
   describe '#create' do
     it 'calls #update and #create_unless_exists' do
-      subject.should_receive(:create_unless_exists)
-      subject.should_receive(:update)
+      expect(subject).to receive(:create_unless_exists)
+      expect(subject).to receive(:update)
       subject.create
     end
   end
@@ -38,46 +38,46 @@ describe Fourchette::Fork do
 
     context 'app does NOT exists' do
       before do
-        Fourchette::Heroku.any_instance.stub(:app_exists?).and_return(false)
+        allow_any_instance_of(Fourchette::Heroku).to receive(:app_exists?).and_return(false)
       end
 
       it 'calls the fork creation' do
-        subject.stub(:post_fork_url)
-        Fourchette::Heroku.any_instance.should_receive(:fork)
+        allow(subject).to receive(:post_fork_url)
+        expect_any_instance_of(Fourchette::Heroku).to receive(:fork)
           .with('my-heroku-app-name', fork_name)
       end
 
       it 'post the URL to the fork on the GitHub PR' do
-        Fourchette::Heroku.any_instance.stub(:fork)
-        Fourchette::Heroku.any_instance.stub_chain(:client, :app, :info)
+        allow_any_instance_of(Fourchette::Heroku).to receive(:fork)
+        allow_any_instance_of(Fourchette::Heroku).to receive_message_chain(:client, :app, :info)
           .and_return('web_url' => 'rainforestqa.com')
-        Fourchette::GitHub.any_instance.should_receive(:comment_pr)
+        expect_any_instance_of(Fourchette::GitHub).to receive(:comment_pr)
           .with(1, 'Test URL: rainforestqa.com')
       end
     end
 
     context 'app DOES exists' do
       before do
-        Fourchette::Heroku.any_instance.stub(:app_exists?).and_return(true)
+        allow_any_instance_of(Fourchette::Heroku).to receive(:app_exists?).and_return(true)
       end
 
       it 'does nothing' do
-        Fourchette::GitHub.any_instance.should_not_receive(:comment_pr)
-        Fourchette::Heroku.any_instance.should_not_receive(:fork)
+        expect_any_instance_of(Fourchette::GitHub).not_to receive(:comment_pr)
+        expect_any_instance_of(Fourchette::Heroku).not_to receive(:fork)
       end
     end
   end
 
   describe '#delete' do
     it 'calls deletes the fork' do
-      Fourchette::GitHub.any_instance.stub(:comment_pr)
-      Fourchette::Heroku.any_instance.should_receive(:delete).with(fork_name)
+      allow_any_instance_of(Fourchette::GitHub).to receive(:comment_pr)
+      expect_any_instance_of(Fourchette::Heroku).to receive(:delete).with(fork_name)
       subject.delete
     end
 
     it 'comments on the GitHub PR' do
-      Fourchette::Heroku.any_instance.stub(:delete)
-      Fourchette::GitHub.any_instance.should_receive(:comment_pr)
+      allow_any_instance_of(Fourchette::Heroku).to receive(:delete)
+      expect_any_instance_of(Fourchette::GitHub).to receive(:comment_pr)
         .with(1, 'Test app deleted!')
       subject.delete
     end

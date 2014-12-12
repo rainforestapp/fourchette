@@ -6,7 +6,7 @@ describe Fourchette::PullRequest do
     subject { described_class.new }
 
     after do
-      Fourchette::Fork.stub(:new).and_return(fork)
+      allow(Fourchette::Fork).to receive(:new).and_return(fork)
       subject.perform(params)
     end
 
@@ -18,7 +18,7 @@ describe Fourchette::PullRequest do
         }
       end
 
-      it { fork.should_receive(:update) }
+      it { expect(fork).to receive(:update) }
     end
 
     context 'action == closed' do
@@ -29,7 +29,7 @@ describe Fourchette::PullRequest do
         }
       end
 
-      it { fork.should_receive(:delete) }
+      it { expect(fork).to receive(:delete) }
     end
 
     context 'action == reopened' do
@@ -40,7 +40,7 @@ describe Fourchette::PullRequest do
         }
       end
 
-      it { fork.should_receive(:create) }
+      it { expect(fork).to receive(:create) }
     end
 
     context 'action == opened' do
@@ -51,7 +51,7 @@ describe Fourchette::PullRequest do
         }
       end
 
-      it { fork.should_receive(:create) }
+      it { expect(fork).to receive(:create) }
     end
 
     context 'title includes [qa skip]' do
@@ -62,7 +62,7 @@ describe Fourchette::PullRequest do
         }
       end
 
-      it { fork.should_not_receive(:create) }
+      it { expect(fork).not_to receive(:create) }
     end
   end
 end

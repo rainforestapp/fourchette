@@ -5,8 +5,8 @@ require 'sucker_punch/testing/inline'
 describe 'GitHub web hooks receiver' do
   it 'kicks an async job doing all the work' do
     expected_param = { 'something' => 'ok' }
-    Fourchette::PullRequest.any_instance
-      .should_receive(:perform)
+    expect_any_instance_of(Fourchette::PullRequest)
+      .to receive(:perform)
       .with(expected_param)
 
     post '/hooks',
