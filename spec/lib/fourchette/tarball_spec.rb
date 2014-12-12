@@ -9,12 +9,12 @@ describe Fourchette::Tarball do
     let(:branch_name) { 'feature/something-new' }
 
     before do
-      subject.stub(:expiration_timestamp).and_return('123')
-      subject.stub(:clone)
-      subject.stub(:tar).and_return('tmp/1234567/123.tar.gz')
-      subject.stub(:system)
+      allow(subject).to receive(:expiration_timestamp).and_return('123')
+      allow(subject).to receive(:clone)
+      allow(subject).to receive(:tar).and_return('tmp/1234567/123.tar.gz')
+      allow(subject).to receive(:system)
       stub_const('ENV', 'FOURCHETTE_APP_URL' => 'http://example.com')
-      SecureRandom.stub(:uuid).and_return('1234567')
+      allow(SecureRandom).to receive(:uuid).and_return('1234567')
     end
 
     it do
@@ -24,18 +24,18 @@ describe Fourchette::Tarball do
     end
 
     it 'clones the repo and checkout the branch' do
-      subject.unstub(:clone)
+      allow(subject).to receive(:clone).and_call_original
       git_instance = double
-      Git.should_receive(:clone).with(
+      expect(Git).to receive(:clone).with(
         git_repo_url, 'tmp/1234567', recursive: true
       ).and_return(git_instance)
-      git_instance.should_receive(:checkout).with(branch_name)
+      expect(git_instance).to receive(:checkout).with(branch_name)
       subject.url(git_repo_url, branch_name, github_repo)
     end
 
     it 'creates the tarball' do
-      subject.unstub(:tar)
-      subject.should_receive(:system).with(
+      allow(subject).to receive(:tar).and_call_original
+      expect(subject).to receive(:system).with(
         'tar -zcf tmp/1234567/123.tar.gz -C tmp/1234567 .'
       )
       subject.url(git_repo_url, branch_name, github_repo)
