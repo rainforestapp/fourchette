@@ -20,16 +20,16 @@ class Fourchette::Pgbackups
   private
 
   def ensure_pgbackups_is_present(heroku_app_name)
-    unless existing_backups?
+    unless existing_backups?(heroku_app_name)
       logger.info "Adding pgbackups to #{heroku_app_name}"
       @heroku.client.addon.create(heroku_app_name, { plan: 'pgbackups' })
     end
   end
 
-  def existing_backups?
-    @heroku.client.addon.list(heroku_app_name).select do |addon|
+  def existing_backups?(heroku_app_name)
+    @heroku.client.addon.list(heroku_app_name).any? do |addon|
       addon['name'] == 'pgbackups'
-    end.any?
+    end
   end
 
   def pg_details_for(app_name)
