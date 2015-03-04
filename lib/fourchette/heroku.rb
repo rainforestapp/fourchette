@@ -96,7 +96,7 @@ class Fourchette::Heroku
 
   def pg_enabled?(app)
     client.addon.list(app).any? do |addon|
-      addon['addon_service']['name'] == 'Heroku Postgres'
+      addon['addon_service']['name'] =~ /heroku.postgres/i
     end
   end
 end
