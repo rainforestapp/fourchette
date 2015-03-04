@@ -133,15 +133,27 @@ describe Fourchette::Heroku do
     end
 
     context 'when a heroku-postgresql addon is enabled' do
-      let(:addon_list) do
-        [{ 'addon_service' => { 'name' => 'Heroku Postgres' } }]
+      let(:addon_list) { [{ 'addon_service' => { 'name' => addon_name } }] }
+
+      shared_examples 'app with pg' do
+        it 'calls Fourchette::Pgbackups#copy' do
+          expect_any_instance_of(Fourchette::Pgbackups).to receive(:copy).with(
+            from_app_name, to_app_name
+          )
+          heroku.copy_pg(from_app_name, to_app_name)
+        end
       end
 
-      it 'calls Fourchette::Pgbackups#copy' do
-        expect_any_instance_of(Fourchette::Pgbackups).to receive(:copy).with(
-          from_app_name, to_app_name
-        )
-        heroku.copy_pg(from_app_name, to_app_name)
+      context "when the addon name is 'Heroku Postgres'" do
+        let(:addon_name) { 'Heroku Postgres' }
+
+        it_behaves_like 'app with pg'
+      end
+
+      context "when the addon name is 'heroku-postgresql'" do
+        let(:addon_name) { 'heroku-postgresql' }
+
+        it_behaves_like 'app with pg'
       end
     end
 
