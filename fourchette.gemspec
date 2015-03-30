@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sinatra-contrib'
   spec.add_dependency 'octokit'
   spec.add_dependency 'git'
-  spec.add_dependency 'heroku', '~> 3.9' # Deprecated, but best/easiest solution for pgbackups...
+  spec.add_dependency 'heroku', '~> 3.30' # Deprecated, but best/easiest solution for pgbackups...
   spec.add_dependency 'rest-client' # required for phbackups
   spec.add_dependency 'platform-api', '~> 0.2.0'
   spec.add_dependency 'sucker_punch'
