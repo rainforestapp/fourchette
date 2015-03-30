@@ -16,16 +16,27 @@ class Fourchette::Pgbackups
     raw_attachment = @heroku.legacy_client.get_attachments(to).body[0]
     attachment = Heroku::Helpers::HerokuPostgresql::Attachment.new raw_attachment
 
-    @client =  Heroku::Client::HerokuPostgresql.new(attachment)
-    @client.pg_copy(from_name, from_url, to_name, to_url)
+    pg_client =  Heroku::Client::HerokuPostgresql.new(attachment)
+
+    wait_for_db(pg_client)
+
+    pg_client.pg_copy(from_name, from_url, to_name, to_url)
   end
 
   private
 
-  def ensure_pgbackups_is_present(heroku_app_name)
-    unless existing_backups?(heroku_app_name)
-      logger.info "Adding pgbackups to #{heroku_app_name}"
-      @heroku.client.addon.create(heroku_app_name, { plan: 'pgbackups' })
+  # taken from Heroku::Command::Pg
+  def wait_for_db(client)
+    logger.info 'Waiting for database to become available...'
+    loop do
+      status = client.get_wait_status
+      if status[:error?]
+        logger.error 'Error waiting for database:'
+        logger.error status[:message]
+        break
+      end
+      break unless status[:waiting?]
+      sleep 5
     end
   end
 
