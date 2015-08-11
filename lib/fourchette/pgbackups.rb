@@ -1,4 +1,7 @@
-require 'heroku/client/pgbackups'
+require 'heroku-api'
+require 'heroku/client/heroku_postgresql'
+require 'heroku/helpers/heroku_postgresql'
+
 class Fourchette::Pgbackups
   include Fourchette::Logger
 
@@ -7,42 +10,42 @@ class Fourchette::Pgbackups
   end
 
   def copy(from, to)
-    ensure_pgbackups_is_present(from)
-    ensure_pgbackups_is_present(to)
-
     from_url, from_name = pg_details_for(from)
     to_url, to_name = pg_details_for(to)
 
-    @client =  Heroku::Client::Pgbackups.new pgbackup_url(from) + '/api'
-    @client.create_transfer(from_url, from_name, to_url, to_name)
+    raw_attachment = @heroku.legacy_client.get_attachments(to).body[0]
+    attachment = Heroku::Helpers::HerokuPostgresql::Attachment.new raw_attachment
+
+    pg_client =  Heroku::Client::HerokuPostgresql.new(attachment)
+
+    logger.info 'Waiting for database #{to_name} to become available'
+    wait_for_db(pg_client)
+
+    pg_client.pg_copy(from_name, from_url, to_name, to_url)
   end
 
   private
 
-  def ensure_pgbackups_is_present(heroku_app_name)
-    unless existing_backups?(heroku_app_name)
-      logger.info "Adding pgbackups to #{heroku_app_name}"
-      @heroku.client.addon.create(heroku_app_name, { plan: 'pgbackups' })
-    end
-  end
-
-  def existing_backups?(heroku_app_name)
-    @heroku.client.addon.list(heroku_app_name).any? do |addon|
-      addon['name'] == 'pgbackups'
+  # taken from Heroku::Command::Pg
+  def wait_for_db(client)
+    loop do
+      status = client.get_wait_status
+      if status[:error?]
+        logger.error 'Error waiting for database:'
+        logger.error status[:message]
+        break
+      end
+      break unless status[:waiting?]
+      sleep 5
     end
   end
 
   def pg_details_for(app_name)
     @heroku.config_vars(app_name).each do |key, value|
-      if key.start_with?('HEROKU_POSTGRESQL_') && key.end_with?('_URL')
-        return [value, key]
+      if key =~ /^HEROKU_POSTGRESQL_(.+)_URL$/
+        return [value, $1]
       end
     end
   end
 
-  def pgbackup_url(app_name)
-    @heroku.config_vars(app_name).each do |k, v|
-      return v if k == 'PGBACKUPS_URL'
-    end
-  end
 end

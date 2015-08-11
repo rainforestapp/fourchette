@@ -30,6 +30,12 @@ class Fourchette::Heroku
     @heroku_client ||= PlatformAPI.connect(api_key)
   end
 
+  def legacy_client
+    api_key = ENV['FOURCHETTE_HEROKU_API_KEY']
+    ENV['HEROKU_API_KEY'] = api_key # necessary for Heroku::Auth.password to work
+    @non_platform_client ||= Heroku::API.new(api_key: api_key)
+  end
+
   def config_vars(app_name)
     client.config_var.info(app_name)
   end
