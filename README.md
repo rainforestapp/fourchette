@@ -1,3 +1,8 @@
+<h1>This project is deprecated...</h1>
+<p>
+Our friends at Heroku have used Fourchette and used it as an inspiration for their <a href="https://devcenter.heroku.com/articles/github-integration-review-apps">"Review Apps"</a>. We have decided to move from Fourchette ourselves to the "official" way and we strongly encourage you to do so.
+</p>
+
 <p align="center">
   <a href="https://github.com/rainforestapp/fourchette">
     <img src="http://i.imgur.com/967yX36.png" alt="Fourchette" />
