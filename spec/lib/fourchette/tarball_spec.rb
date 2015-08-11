@@ -36,7 +36,7 @@ describe Fourchette::Tarball do
     it 'creates the tarball' do
       allow(subject).to receive(:tar).and_call_original
       expect(subject).to receive(:system).with(
-        'tar -zcf tmp/1234567/123.tar.gz -C tmp/1234567 .'
+        'tar --ignore-failed-read -zcf tmp/1234567/123.tar.gz -C tmp/1234567 .'
       )
       subject.url(git_repo_url, branch_name, github_repo)
     end
