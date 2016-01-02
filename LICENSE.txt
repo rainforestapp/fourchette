@@ -1,4 +1,4 @@
-Copyright (c) 2014-2015 Jean-Philippe Boily
+Copyright (c) 2014-2016 Jean-Philippe Boily
 
 MIT License
 
