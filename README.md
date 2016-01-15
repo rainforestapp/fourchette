@@ -57,7 +57,7 @@ You have two choices here, the easy path, or the manual path.
 
 **Manual**
 
-This will give you more flexibility to create before and after actions, though you could also do it with the easy path and cloning your repo, etc.
+This will give you more flexibility to create before and after actions, though you could also do it with the easy path and cloning your repository, etc.
 
 1. run `gem install fourchette`
 2. run `fourchette new my-app-name`. You can replace "my-app-name" by whatever you want it, this is the name of the directory your Fourchette app will be created in.
@@ -77,7 +77,7 @@ This will give you more flexibility to create before and after actions, though y
 - `export FOURCHETTE_APP_URL="https://fourchette-app.herokuapp.com"`
 - `export FOURCHETTE_HEROKU_APP_PREFIX="fourchette"` # This is basically to namespace your forks. In that example, they would be named "fourchette-pr-1234" where "1234" is the PR number. Beware, the name can't be more than 30 characters total! It will be changed to be lowercase only, so you should probably just use lowercase characters anyways.
 
-**IMPORTANT**: the GitHub user needs to be an admin of the repo to be able to add, enable or disable the web hook used by Fourchette. You could create it by hand if you prefer.
+**IMPORTANT**: the GitHub user needs to be an admin of the repoditory to be able to add, enable or disable the web hook used by Fourchette. You could create it by hand if you prefer.
 
 ### Enable your Fourchette instance
 
